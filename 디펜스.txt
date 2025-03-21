@@ -1,0 +1,16 @@
+player가 가져야 할 정보
+Player 레벨 및 경험치 시스템
+자원 관리 (골드, 에너지 등)
+해금된 포탑 목록
+설치된 포탑 목록
+포탑 업그레이드 시스템
+게임 진행 상태 및 적의 상태 추적
+특수 능력 관리 등
+
+player와 playerTowerManager 분리
+
+EnemyManger와 EnemySpawner분리
+
+EnemySpawner는 EnemySpawnData할당
+
+poolManager의 spawn함수 분리 

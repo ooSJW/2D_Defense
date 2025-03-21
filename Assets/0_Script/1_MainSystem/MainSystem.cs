@@ -6,6 +6,11 @@ public partial class MainSystem : GenericSingleton<MainSystem> // Data Field
     public SceneManager SceneManager { get; private set; } = null;
     public DataManager DataManager { get; private set; } = null;
     public PoolManager PoolManager { get; private set; } = null;
+    public TileManager TileManager { get; private set; } = null;
+    public PlayerManager PlayerManager { get; private set; } = null;
+    public PlayerBuildingManager PlayerBuildingManager { get; private set; } = null;
+    public EnemySpawnManager EnemySpawnManager { get; private set; } = null;
+    public EnemyManager EnemyManager { get; private set; } = null;
 }
 public partial class MainSystem : GenericSingleton<MainSystem>// Initialize
 {
@@ -14,6 +19,11 @@ public partial class MainSystem : GenericSingleton<MainSystem>// Initialize
         SceneManager = gameObject.AddComponent<SceneManager>();
         DataManager = gameObject.AddComponent<DataManager>();
         PoolManager = gameObject.AddComponent<PoolManager>();
+        TileManager = gameObject.AddComponent<TileManager>();
+        PlayerManager = gameObject.AddComponent<PlayerManager>();
+        PlayerBuildingManager = gameObject.AddComponent<PlayerBuildingManager>();
+        EnemySpawnManager = gameObject.AddComponent<EnemySpawnManager>();
+        EnemyManager = gameObject.AddComponent<EnemyManager>();
     }
     public void Initialize()
     {
@@ -23,6 +33,11 @@ public partial class MainSystem : GenericSingleton<MainSystem>// Initialize
         SceneManager.Initialize();
         DataManager.Initialize();
         PoolManager.Initialize();
+        TileManager.Initialize();
+        PlayerManager.Initialize();
+        PlayerBuildingManager.Initialize();
+        EnemySpawnManager.Initialize();
+        EnemyManager.Initialize();
     }
     private void Setup()
     {
