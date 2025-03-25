@@ -17,6 +17,7 @@ public partial class BaseScene : MonoBehaviour // Data Field
     [SerializeField] private PlayerBuildingController playerBuildingController;
     [SerializeField] private EnemySpawnController enemySpawnController;
     [SerializeField] private EnemyController enemyController;
+    [SerializeField] private UIController uiController;
 
 
 }
@@ -59,7 +60,7 @@ public partial class BaseScene : MonoBehaviour // Private Property
         currentSceneName = notCombatScene.FirstOrDefault(elem => elem == SceneName);
         if (currentSceneName != SceneName.None) // Not CombatScene Initialzie
         {
-
+            MainSystem.Instance.UIManager.SignupUIController(uiController);
             return;
         }
 
@@ -71,7 +72,7 @@ public partial class BaseScene : MonoBehaviour // Private Property
             MainSystem.Instance.PlayerBuildingManager.SignupPlayerBuildingController(playerBuildingController);
             MainSystem.Instance.EnemySpawnManager.SignupEnemySpawnController(enemySpawnController);
             MainSystem.Instance.EnemyManager.SignupEnemyController(enemyController);
-
+            MainSystem.Instance.UIManager.SignupUIController(uiController);
             return;
         }
 

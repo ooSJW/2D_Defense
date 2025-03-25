@@ -11,6 +11,7 @@ public partial class MainSystem : GenericSingleton<MainSystem> // Data Field
     public PlayerBuildingManager PlayerBuildingManager { get; private set; } = null;
     public EnemySpawnManager EnemySpawnManager { get; private set; } = null;
     public EnemyManager EnemyManager { get; private set; } = null;
+    public UIManager UIManager { get; private set; } = null;
 }
 public partial class MainSystem : GenericSingleton<MainSystem>// Initialize
 {
@@ -24,6 +25,7 @@ public partial class MainSystem : GenericSingleton<MainSystem>// Initialize
         PlayerBuildingManager = gameObject.AddComponent<PlayerBuildingManager>();
         EnemySpawnManager = gameObject.AddComponent<EnemySpawnManager>();
         EnemyManager = gameObject.AddComponent<EnemyManager>();
+        UIManager = gameObject.AddComponent<UIManager>();
     }
     public void Initialize()
     {
@@ -38,6 +40,7 @@ public partial class MainSystem : GenericSingleton<MainSystem>// Initialize
         PlayerBuildingManager.Initialize();
         EnemySpawnManager.Initialize();
         EnemyManager.Initialize();
+        UIManager.Initialize();
     }
     private void Setup()
     {

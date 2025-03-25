@@ -8,6 +8,7 @@ TagManager:
   - LevelChanger
   - Structable
   - UnStructable
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -50,6 +51,9 @@ TagManager:
     locked: 0
   - name: Object
     uniqueID: 1448525797
+    locked: 0
+  - name: Effect
+    uniqueID: 3586982849
     locked: 0
   m_RenderingLayers:
   - Default

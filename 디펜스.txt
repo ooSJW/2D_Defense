@@ -7,7 +7,7 @@ Player 레벨 및 경험치 시스템
 게임 진행 상태 및 적의 상태 추적
 특수 능력 관리 등
 
-player와 playerTowerManager 분리
+player와 playerBuildingManager 분리
 
 EnemyManger와 EnemySpawner분리
 

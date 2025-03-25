@@ -2,7 +2,7 @@ using UnityEngine;
 
 public partial class PlayerBuilding : MonoBehaviour // Data Field
 {
-
+    [SerializeField] private ParticleSystem muzzleParticle;
 }
 public partial class PlayerBuilding : MonoBehaviour // Initialize
 {
@@ -22,5 +22,12 @@ public partial class PlayerBuilding : MonoBehaviour // Initialize
 }
 public partial class PlayerBuilding : MonoBehaviour // 
 {
-
+    public void PlayParticle()
+    {
+        muzzleParticle.Play();
+    }
+    public void PauseParticle()
+    {
+        muzzleParticle.Stop(true);
+    }
 }
