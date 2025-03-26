@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8891654319568014058}
   - component: {fileID: 3634168597067633808}
   - component: {fileID: 5596164391575797400}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TwoTreeB
   m_TagString: UnStructable
   m_Icon: {fileID: 0}

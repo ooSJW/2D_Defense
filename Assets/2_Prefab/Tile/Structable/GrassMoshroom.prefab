@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8252558581635687658}
   - component: {fileID: 4736393434155715690}
   - component: {fileID: 4556819101116841973}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GrassMoshroom
   m_TagString: Structable
   m_Icon: {fileID: 0}

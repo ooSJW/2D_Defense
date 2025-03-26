@@ -12,13 +12,16 @@ public partial class BaseScene : MonoBehaviour // Data Field
     public List<GameObject> poolableObjectList;
 
     [Header("InGameScene Member")]
+    [SerializeField] private StageController stageController;
     [SerializeField] private TileController tileController;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private PlayerBuildingController playerBuildingController;
     [SerializeField] private EnemySpawnController enemySpawnController;
     [SerializeField] private EnemyController enemyController;
     [SerializeField] private UIController uiController;
-
+    // TODO TEST
+    [SerializeField] private GameObject enemyTarget;
+    [SerializeField] private GameObject enemySpawn;
 
 }
 public partial class BaseScene : MonoBehaviour // Initialize
@@ -67,6 +70,7 @@ public partial class BaseScene : MonoBehaviour // Private Property
         currentSceneName = combatScene.FirstOrDefault(elem => elem == SceneName);
         if (currentSceneName != SceneName.None) // CombatScene Initialize
         {
+            MainSystem.Instance.StageManager.SignupStageController(stageController);
             MainSystem.Instance.TileManager.SignupTileController(tileController);
             MainSystem.Instance.PlayerManager.SignupPlayerController(playerController);
             MainSystem.Instance.PlayerBuildingManager.SignupPlayerBuildingController(playerBuildingController);
@@ -77,6 +81,14 @@ public partial class BaseScene : MonoBehaviour // Private Property
         }
 
         Debug.LogWarning($"Check SceneName [currentSceneName : {name}]");
+    }
+}
+
+public partial class BaseScene : MonoBehaviour // Property
+{
+    public Vector3 GetEnemyTargetPosition()
+    {
+        return enemyTarget.transform.position;
     }
 }
 

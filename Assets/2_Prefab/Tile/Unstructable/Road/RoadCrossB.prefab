@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7795914591764888431}
   - component: {fileID: 3539464051894452641}
   - component: {fileID: 1069182212911758373}
-  m_Layer: 3
+  - component: {fileID: 3876907178963803810}
+  m_Layer: 6
   m_Name: RoadCrossB
   m_TagString: UnStructable
   m_Icon: {fileID: 0}
@@ -134,3 +135,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.28, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &3876907178963803810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6225201791112738895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff

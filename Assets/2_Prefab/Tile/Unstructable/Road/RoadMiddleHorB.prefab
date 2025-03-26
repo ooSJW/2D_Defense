@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5108935750508588850}
   - component: {fileID: 5276219506476098436}
   - component: {fileID: 2085835946863916099}
-  m_Layer: 3
+  - component: {fileID: 1169214288919231312}
+  m_Layer: 6
   m_Name: RoadMiddleHorB
   m_TagString: UnStructable
   m_Icon: {fileID: 0}
@@ -134,3 +135,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.28, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &1169214288919231312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4739115562809680012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff

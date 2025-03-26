@@ -1,4 +1,5 @@
 using UnityEngine;
+using static EnemySpawnData;
 
 public partial class EnemySpawner : MonoBehaviour // Data Field
 {

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2684356922101478385}
   - component: {fileID: 8651935824435188027}
   - component: {fileID: 8759257096682283664}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TreesetA-C
   m_TagString: UnStructable
   m_Icon: {fileID: 0}

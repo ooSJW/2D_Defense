@@ -1,0 +1,6 @@
+index,spawn_group_name,spawn_enemy_name_array,spawn_percent_array,spawn_count,spawn_delay
+50,GroupA,Knight Merchant,0.7 1,5,0.35
+51,GroupB,Knight Merchant,0.7 1,10,0.3
+52,GroupC,Knight Merchant,0.7 1,15,0.25
+53,GroupD,Knight Merchant Peasant,0.5 0.7 1,20,0.2
+54,GroupE,Knight Merchant Peasant,0.4 0.7 1,30,0.2

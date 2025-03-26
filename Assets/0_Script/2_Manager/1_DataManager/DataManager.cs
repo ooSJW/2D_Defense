@@ -6,13 +6,15 @@ using UnityEngine;
 
 public partial class DataManager : MonoBehaviour // Data Field
 {
-
+    public StageData StageData { get; private set; }
+    public EnemySpawnData EnemySpawnData { get; private set; }
 }
 public partial class DataManager : MonoBehaviour // Initialize
 {
     private void Allocate()
     {
-
+        StageData = new StageData();
+        EnemySpawnData = new EnemySpawnData();
     }
     public void Initialize()
     {
@@ -21,7 +23,8 @@ public partial class DataManager : MonoBehaviour // Initialize
     }
     private void Setup()
     {
-
+        StageData.Initialize();
+        EnemySpawnData.Initialize();
     }
 }
 public partial class DataManager : MonoBehaviour // Property
@@ -85,7 +88,7 @@ public partial class DataManager : MonoBehaviour // Property
                 if (currentField != null)
                 {
                     if (!currentField.FieldType.IsArray)
-                        currentField.SetValue(data, Convert.ChangeType(currentCsvValue[i], currentField.FieldType));
+                        currentField.SetValue(data, Convert.ChangeType(currentCsvValue, currentField.FieldType));
 
                     else
                     {
@@ -112,7 +115,7 @@ public partial class DataManager : MonoBehaviour // Property
             }
             catch
             {
-                Debug.LogWarning($"Field Name Is Duplicate [name :{currentField.Name}]");
+                Debug.LogWarning($"Field Name Is Duplicate Or Has Error, Check Data File [name :{currentField.Name}]");
             }
         }
         return data;
