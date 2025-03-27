@@ -2,13 +2,16 @@ using UnityEngine;
 
 public partial class UIButtonEvent : MonoBehaviour // Data Field 
 {
-    [SerializeField] private GameObject buildingListUI;
 }
 public partial class UIButtonEvent : MonoBehaviour // Property
 {
     public void OnOffbuildingListUI()
     {
-        bool isActive = buildingListUI.activeSelf;
-        buildingListUI.SetActive(!isActive);
+        MainSystem.Instance.UIManager.UIController.BuildingListUI.OnOffbuildingListUI();
+    }
+
+    public void ChangeScene(int sceneValue)
+    {
+        MainSystem.Instance.SceneManager.LoadScene(SceneName.LobbyScene);
     }
 }

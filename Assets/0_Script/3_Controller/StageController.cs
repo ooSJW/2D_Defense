@@ -1,23 +1,23 @@
+using System.Collections;
 using UnityEngine;
 using static StageData;
 
 public partial class StageController : MonoBehaviour // Data property
 {
-    private StageInformation stageInformation;
-    public StageInformation StageInformation
+    private int currentSubStageIndex;
+    public int CurrentSubStageIndex
     {
-        get => stageInformation;
-        private set
+        get => currentSubStageIndex;
+        set
         {
-            stageInformation = new StageInformation()
+            if (currentSubStageIndex != value)
             {
-                index = value.index,
-                stage_id = value.stage_id,
-                last_sub_stage = value.last_sub_stage,
-                spawn_group_name_array = value.spawn_group_name_array,
-                spawn_group_percent_array = value.spawn_group_percent_array,
-                next_stage_delay = value.next_stage_delay,
-            };
+                currentSubStageIndex = value;
+                if (MainSystem.Instance.StageManager.StageInformation.last_sub_stage >= currentSubStageIndex)
+                    StartCoroutine(WaitForNexStage());
+                else
+                    StartCoroutine(EndStage());
+            }
         }
     }
 }
@@ -25,8 +25,7 @@ public partial class StageController : MonoBehaviour // Initialize
 {
     private void Allocate()
     {
-        //TODO TEST
-        StageInformation = MainSystem.Instance.DataManager.StageData.GetData(0);
+
     }
     public void Initialize()
     {
@@ -38,7 +37,28 @@ public partial class StageController : MonoBehaviour // Initialize
 
     }
 }
-public partial class StageController : MonoBehaviour // 
+public partial class StageController : MonoBehaviour // Property
 {
+    public void ChangeUI()
+    {
+        // TODO : UIø° StageManager.stageInfo.stage_id+" - "+currentStageIndex «•√‚
+    }
+}
 
+public partial class StageController : MonoBehaviour // Coroutine
+{
+    public IEnumerator WaitForNexStage()
+    {
+        // TODO : 
+        float delayTime = MainSystem.Instance.StageManager.StageInformation.stage_start_delay;
+        yield return new WaitForSeconds(delayTime);
+        MainSystem.Instance.EnemySpawnManager.EnemySpawnController.SetSpawnEnemy(true);
+        yield break;
+    }
+    public IEnumerator EndStage()
+    {
+        yield return new WaitForSeconds(MainSystem.Instance.StageManager.StageInformation.stage_start_delay);
+        MainSystem.Instance.UIManager.UIController.EndStage();
+        yield break;
+    }
 }

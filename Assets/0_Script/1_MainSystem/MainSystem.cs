@@ -55,6 +55,6 @@ public partial class MainSystem : GenericSingleton<MainSystem> // Property
     public void MainSystemStart()
     {
         Initialize();
-        SceneManager.LoadScene(SceneName.LobbyScene);
+        SceneManager.LoadScene(SceneName.InGameScene);
     }
 }

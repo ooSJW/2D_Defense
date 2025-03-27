@@ -2,7 +2,7 @@ using UnityEngine;
 
 public partial class PlayerInput : MonoBehaviour // Data Field
 {
-
+    private Player player;
 }
 public partial class PlayerInput : MonoBehaviour // Initialize
 {
@@ -10,8 +10,9 @@ public partial class PlayerInput : MonoBehaviour // Initialize
     {
 
     }
-    public void Initialize()
+    public void Initialize(Player playerValue)
     {
+        player = playerValue;
         Allocate();
         Setup();
     }

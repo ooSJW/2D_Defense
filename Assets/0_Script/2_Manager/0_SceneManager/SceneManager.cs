@@ -28,9 +28,7 @@ public partial class SceneManager : MonoBehaviour // Property
     public void LoadScene(SceneName loadSceneName)
     {
         LoadSceneName = loadSceneName;
-        // TODO TEST
-        UnityEngine.SceneManagement.SceneManager.LoadScene("ZTESTSCENE");
-        // UnityEngine.SceneManagement.SceneManager.LoadScene(SceneName.LoadingScene.ToString());
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneName.LoadingScene.ToString());
     }
 }
 

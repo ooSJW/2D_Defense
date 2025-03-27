@@ -3,43 +3,52 @@ using static EnemySpawnData;
 
 public partial class EnemySpawnController : MonoBehaviour // Data Field
 {
-    private EnemySpawnInformation enemySpawnInformation;
-    public EnemySpawnInformation EnemySpawnInformation
-    {
-        get => enemySpawnInformation;
+    [SerializeField] private EnemySpawner enemySpawner;
+}
 
+public partial class EnemySpawnController : MonoBehaviour // Data Field
+{
+    private bool spawnEnemy;
+    public bool SpawnEnemy
+    {
+        get => spawnEnemy;
         private set
         {
-            enemySpawnInformation = new EnemySpawnInformation()
+            if (spawnEnemy != value)
             {
-                index = value.index,
-                spawn_group_name = value.spawn_group_name,
-                spawn_enemy_name_array = value.spawn_enemy_name_array,
-                spawn_percent_array = value.spawn_percent_array,
-                spawn_count = value.spawn_count,
-                spawn_delay = value.spawn_delay,
-            };
-            // TODO Spawn
+                spawnEnemy = value;
+                if (spawnEnemy)
+                {
+                    StartCoroutine(enemySpawner.SpawnEnemies());
+                }
+            }
         }
     }
 }
+
+
 public partial class EnemySpawnController : MonoBehaviour // Initialize
 {
     private void Allocate()
     {
-        EnemySpawnInformation = MainSystem.Instance.DataManager.EnemySpawnData.GetData("GroupA");
+
     }
     public void Initialize()
     {
         Allocate();
         Setup();
+
+        enemySpawner.Initialize();
     }
     private void Setup()
     {
 
     }
 }
-public partial class EnemySpawnController : MonoBehaviour // 
+public partial class EnemySpawnController : MonoBehaviour // Property
 {
-
+    public void SetSpawnEnemy(bool value)
+    {
+        SpawnEnemy = value;
+    }
 }

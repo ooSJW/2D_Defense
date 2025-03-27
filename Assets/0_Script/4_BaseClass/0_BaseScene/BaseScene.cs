@@ -10,6 +10,7 @@ public partial class BaseScene : MonoBehaviour // Data Field
     public SceneName SceneName { get => sceneName; }
 
     public List<GameObject> poolableObjectList;
+    public List<Enemy> poolableEnemyList;
 
     [Header("InGameScene Member")]
     [SerializeField] private StageController stageController;
@@ -77,6 +78,7 @@ public partial class BaseScene : MonoBehaviour // Private Property
             MainSystem.Instance.EnemySpawnManager.SignupEnemySpawnController(enemySpawnController);
             MainSystem.Instance.EnemyManager.SignupEnemyController(enemyController);
             MainSystem.Instance.UIManager.SignupUIController(uiController);
+            MainSystem.Instance.StageManager.StageController.CurrentSubStageIndex++;
             return;
         }
 

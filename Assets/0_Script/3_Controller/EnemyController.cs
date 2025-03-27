@@ -20,7 +20,14 @@ public partial class EnemyController : MonoBehaviour // Initialize
 
     }
 }
-public partial class EnemyController : MonoBehaviour // 
+public partial class EnemyController : MonoBehaviour // Property
 {
-
+    public void CheckStageState()
+    {
+        if (!MainSystem.Instance.EnemySpawnManager.EnemySpawnController.SpawnEnemy)
+        {
+            if (MainSystem.Instance.EnemyManager.AllFieldEnemyList.Count == 0)
+                MainSystem.Instance.StageManager.StageController.CurrentSubStageIndex++;
+        }
+    }
 }

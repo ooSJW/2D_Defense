@@ -8,6 +8,8 @@ public partial class DataManager : MonoBehaviour // Data Field
 {
     public StageData StageData { get; private set; }
     public EnemySpawnData EnemySpawnData { get; private set; }
+    public PlayerData PlayerData { get; private set; }
+    public PlayerBuildingData PlayerBuildingData { get; private set; }
 }
 public partial class DataManager : MonoBehaviour // Initialize
 {
@@ -15,6 +17,8 @@ public partial class DataManager : MonoBehaviour // Initialize
     {
         StageData = new StageData();
         EnemySpawnData = new EnemySpawnData();
+        PlayerData = new PlayerData();
+        PlayerBuildingData = new PlayerBuildingData();
     }
     public void Initialize()
     {

@@ -5,12 +5,14 @@ using UnityEngine;
 public partial class PoolManager : MonoBehaviour // Data Field
 {
     private Dictionary<string, Pool> poolDict;
+    private Dictionary<string, EnemyPool> enemyPoolDict;
 }
 public partial class PoolManager : MonoBehaviour // Initialize
 {
     private void Allocate()
     {
         poolDict = new Dictionary<string, Pool>();
+        enemyPoolDict = new Dictionary<string, EnemyPool>();
     }
     public void Initialize()
     {
@@ -35,12 +37,32 @@ public partial class PoolManager : MonoBehaviour // Property
             pool.Register();
             poolDict.Add(poolableObjectList[i].name, pool);
         }
+
+        enemyPoolDict.Clear();
+        List<Enemy> poolableEnemyList = MainSystem.Instance.SceneManager.ActiveScene.poolableEnemyList;
+        for (int i = 0; i < poolableEnemyList.Count; i++)
+        {
+            EnemyPool enemyPool = new EnemyPool(poolableEnemyList[i].gameObject);
+            enemyPool.Register();
+            enemyPoolDict.Add(poolableEnemyList[i].name, enemyPool);
+        }
     }
 
     public GameObject Spawn(string poolObjectName, Transform activeParent = null, Vector3 spawnPosition = default)
     {
         if (poolDict.ContainsKey(poolObjectName))
             return poolDict[poolObjectName].Spawn(activeParent, spawnPosition);
+        else
+        {
+            Debug.LogWarning($"Spawn Error [name : {poolObjectName}]");
+            return null;
+        }
+    }
+
+    public Enemy SpawnEnemy(string poolObjectName, Transform activeParent = null, Vector3 spawnPosition = default)
+    {
+        if (enemyPoolDict.ContainsKey(poolObjectName))
+            return enemyPoolDict[poolObjectName].SpawnEnemy(activeParent, spawnPosition);
         else
         {
             Debug.LogWarning($"Spawn Error [name : {poolObjectName}]");
@@ -55,6 +77,14 @@ public partial class PoolManager : MonoBehaviour // Property
         else
             Debug.LogWarning($"Despawn Error [name : {despawnObject.name}]");
     }
+
+    public void DespawnEnemy(Enemy despawnenemy)
+    {
+        if (enemyPoolDict.ContainsKey(despawnenemy.name))
+            enemyPoolDict[despawnenemy.name].DespawnEnemy(despawnenemy);
+        else
+            Debug.LogWarning($"Despawn Error [name : {despawnenemy.name}]");
+    }
 }
 
 
@@ -62,37 +92,36 @@ public partial class PoolManager : MonoBehaviour // Inner class
 {
     public class Pool
     {
-        private List<GameObject> poolList;
-        private GameObject originPrefab;
-        private Transform parent;
-        private int spawnCount;
+        protected Queue<GameObject> poolQueue;
+        protected GameObject originPrefab;
+        protected Transform parent;
+        protected int spawnCount;
 
         public Pool(GameObject prefabValue, int spawnCountValue = 10)
         {
-            poolList = new List<GameObject>();
+            poolQueue = new Queue<GameObject>();
             originPrefab = prefabValue;
             spawnCount = spawnCountValue;
 
             parent = new GameObject() { name = $"[Pool] : {originPrefab.name}" }.transform;
         }
 
-        public void Register()
+        public virtual void Register()
         {
             for (int i = 0; i < spawnCount; i++)
             {
                 GameObject newObject = Instantiate(originPrefab, parent.position, Quaternion.identity, parent);
                 newObject.name = originPrefab.name;
                 newObject.SetActive(false);
-                poolList.Add(newObject);
+                poolQueue.Enqueue(newObject);
             }
         }
         public GameObject Spawn(Transform activeParent = null, Vector3 spawnPosition = default)
         {
             GameObject poolObject;
-            if (poolList.Count > 0)
+            if (poolQueue.Count > 0)
             {
-                poolObject = poolList[0];
-                poolList.Remove(poolObject);
+                poolObject = poolQueue.Dequeue();
                 poolObject.transform.SetParent(activeParent);
                 poolObject.transform.position = spawnPosition;
                 poolObject.SetActive(true);
@@ -108,7 +137,53 @@ public partial class PoolManager : MonoBehaviour // Inner class
         {
             despawnObject.transform.SetParent(parent);
             despawnObject.SetActive(false);
-            poolList.Add(despawnObject);
+            poolQueue.Enqueue(despawnObject);
+        }
+    }
+
+    public class EnemyPool : Pool
+    {
+        private Queue<Enemy> enemyPoolQueue;
+        public EnemyPool(GameObject originPrefabValue, int initlaiCount = 10) : base(originPrefabValue, initlaiCount)
+        {
+            enemyPoolQueue = new Queue<Enemy>();
+        }
+
+        public override void Register()
+        {
+            for (int i = 0; i < spawnCount; i++)
+            {
+                GameObject newObject = Instantiate(originPrefab, parent.position, Quaternion.identity, parent);
+                newObject.name = originPrefab.name;
+                newObject.SetActive(false);
+                Enemy enemy = newObject.GetComponent<Enemy>();
+                enemyPoolQueue.Enqueue(enemy);
+            }
+        }
+
+        public Enemy SpawnEnemy(Transform activeParent = null, Vector3 spawnPosition = default)
+        {
+            Enemy poolEnemy;
+            if (enemyPoolQueue.Count > 0)
+            {
+                poolEnemy = enemyPoolQueue.Dequeue();
+                poolEnemy.transform.SetParent(activeParent);
+                poolEnemy.transform.position = spawnPosition;
+                poolEnemy.gameObject.SetActive(true);
+            }
+            else
+            {
+                poolEnemy = Instantiate(originPrefab, spawnPosition, Quaternion.identity, activeParent).GetComponent<Enemy>();
+                poolEnemy.gameObject.name = originPrefab.name;
+            }
+            return poolEnemy;
+        }
+
+        public void DespawnEnemy(Enemy despawnEnemy)
+        {
+            despawnEnemy.transform.SetParent(parent);
+            despawnEnemy.gameObject.SetActive(false);
+            enemyPoolQueue.Enqueue(despawnEnemy);
         }
     }
 }
