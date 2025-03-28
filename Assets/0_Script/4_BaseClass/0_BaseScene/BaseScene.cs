@@ -11,11 +11,11 @@ public partial class BaseScene : MonoBehaviour // Data Field
 
     public List<GameObject> poolableObjectList;
     public List<Enemy> poolableEnemyList;
+    private Player player;
 
     [Header("InGameScene Member")]
     [SerializeField] private StageController stageController;
     [SerializeField] private TileController tileController;
-    [SerializeField] private PlayerController playerController;
     [SerializeField] private PlayerBuildingController playerBuildingController;
     [SerializeField] private EnemySpawnController enemySpawnController;
     [SerializeField] private EnemyController enemyController;
@@ -41,7 +41,7 @@ public partial class BaseScene : MonoBehaviour // Initialize
     }
     private void Setup()
     {
-        MainSystem.Instance.PoolManager.Register();
+
     }
 }
 
@@ -61,9 +61,13 @@ public partial class BaseScene : MonoBehaviour // Private Property
             return;
         }
 
+        MainSystem.Instance.PoolManager.Register();
+        player = MainSystem.Instance.PoolManager.Spawn("Player").GetComponent<Player>();
+
         currentSceneName = notCombatScene.FirstOrDefault(elem => elem == SceneName);
         if (currentSceneName != SceneName.None) // Not CombatScene Initialzie
         {
+            MainSystem.Instance.PlayerManager.SignupPlayer(player);
             MainSystem.Instance.UIManager.SignupUIController(uiController);
             return;
         }
@@ -71,9 +75,10 @@ public partial class BaseScene : MonoBehaviour // Private Property
         currentSceneName = combatScene.FirstOrDefault(elem => elem == SceneName);
         if (currentSceneName != SceneName.None) // CombatScene Initialize
         {
+            MainSystem.Instance.PoolManager.Register();
             MainSystem.Instance.StageManager.SignupStageController(stageController);
             MainSystem.Instance.TileManager.SignupTileController(tileController);
-            MainSystem.Instance.PlayerManager.SignupPlayerController(playerController);
+            MainSystem.Instance.PlayerManager.SignupPlayer(player);
             MainSystem.Instance.PlayerBuildingManager.SignupPlayerBuildingController(playerBuildingController);
             MainSystem.Instance.EnemySpawnManager.SignupEnemySpawnController(enemySpawnController);
             MainSystem.Instance.EnemyManager.SignupEnemyController(enemyController);

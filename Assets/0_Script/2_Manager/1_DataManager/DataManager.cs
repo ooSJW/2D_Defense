@@ -29,6 +29,8 @@ public partial class DataManager : MonoBehaviour // Initialize
     {
         StageData.Initialize();
         EnemySpawnData.Initialize();
+        PlayerData.Initialize();
+        PlayerBuildingData.Initialize();
     }
 }
 public partial class DataManager : MonoBehaviour // Property

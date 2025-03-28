@@ -12,7 +12,7 @@ public partial class PlayerBuildingData  // Data Field
         public string ui_name;
         public string description;
         public int[] damage_array;
-        public int[] attack_range_array;
+        public float[] attack_range_array;
         public float[] attack_delay_array;
         public string building_type;
         public int cost;
@@ -47,8 +47,9 @@ public partial class PlayerBuildingData  // Initialize
 }
 public partial class PlayerBuildingData  // Property
 {
-    public PlayerBuildingInformation GetData(string name)
+    public PlayerBuildingInformation GetData(BuildingName buildingName)
     {
+        string name = buildingName.ToString();
         return playerBuildingInfoDicit.FirstOrDefault(elem => elem.Value.name == name).Value;
     }
 }

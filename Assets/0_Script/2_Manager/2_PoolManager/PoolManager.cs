@@ -125,11 +125,13 @@ public partial class PoolManager : MonoBehaviour // Inner class
                 poolObject.transform.SetParent(activeParent);
                 poolObject.transform.position = spawnPosition;
                 poolObject.SetActive(true);
+                print("IF");
             }
             else
             {
                 poolObject = Instantiate(originPrefab, spawnPosition, Quaternion.identity, activeParent);
                 poolObject.name = originPrefab.name;
+                print("else");
             }
             return poolObject;
         }

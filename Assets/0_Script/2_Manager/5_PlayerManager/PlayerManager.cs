@@ -2,7 +2,7 @@ using UnityEngine;
 
 public partial class PlayerManager : MonoBehaviour // Data Field
 {
-    public PlayerController PlayerController { get; private set; } = null;
+    public Player Player { get; private set; } = null;
 }
 public partial class PlayerManager : MonoBehaviour // Initialize
 {
@@ -22,13 +22,13 @@ public partial class PlayerManager : MonoBehaviour // Initialize
 }
 public partial class PlayerManager : MonoBehaviour // Sign
 {
-    public void SignupPlayerController(PlayerController playerController)
+    public void SignupPlayer(Player player)
     {
-        PlayerController = playerController;
-        PlayerController.Initialize();
+        Player = player;
+        Player.Initialize();
     }
-    public void SigndownPlayerController()
+    public void SigndownPlayer()
     {
-        PlayerController = null;
+        Player = null;
     }
 }

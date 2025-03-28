@@ -2,7 +2,8 @@ using UnityEngine;
 
 public partial class BuildingListUI : MonoBehaviour // Data Field
 {
-    [SerializeField] private GameObject buildingList;
+    [SerializeField] private GameObject buildingListBackground;
+    [SerializeField] private RectTransform contentTransform;
 
 }
 public partial class BuildingListUI : MonoBehaviour // Initialize
@@ -21,11 +22,17 @@ public partial class BuildingListUI : MonoBehaviour // Initialize
 
     }
 }
-public partial class BuildingListUI : MonoBehaviour // public
+public partial class BuildingListUI : MonoBehaviour // Property
 {
+    public void SpawnBuildingUI(BuildingName name)
+    {
+        BuildingUI buildingUI = MainSystem.Instance.PoolManager.Spawn("BuildingUI", contentTransform).GetComponent<BuildingUI>();
+        buildingUI.Initialize(name);
+    }
+
     public void OnOffbuildingListUI()
     {
-        bool isActive = buildingList.activeSelf;
-        buildingList.SetActive(!isActive);
+        bool isActive = buildingListBackground.activeSelf;
+        buildingListBackground.SetActive(!isActive);
     }
 }
