@@ -367,9 +367,9 @@ GameObject:
   - component: {fileID: 4734661764401010068}
   - component: {fileID: -4233522253709260205}
   - component: {fileID: 9052673694423231464}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Priest
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

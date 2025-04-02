@@ -1,10 +1,16 @@
+using NUnit.Framework;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using static PlayerBuildingData;
 
 public partial class PlayerBuilding : MonoBehaviour // Data Field
 {
     [field: SerializeField] public PlayerBuildingAttackDetector PlayerBuildingAttackDetector { get; private set; } = null;
+    [field: SerializeField] public PlayerBuildingCombat PlayerBuildingCombat { get; private set; } = null;
+    [field: SerializeField] public PlayerBuildingAnimation PlayerBuildingAnimation { get; private set; } = null;
+
     [SerializeField] private ParticleSystem muzzleParticle;
     [SerializeField] private SpriteRenderer buildingSpriteRenderer;
     [SerializeField] private SpriteRenderer attackRangespriteRenderer;
@@ -26,6 +32,7 @@ public partial class PlayerBuilding : MonoBehaviour // Data Property
                 name = value.name,
                 ui_name = value.ui_name,
                 description = value.description,
+                usable_bullet_name = value.usable_bullet_name,
                 damage_array = value.damage_array,
                 attack_delay_array = value.attack_delay_array,
                 attack_range_array = value.attack_range_array,
@@ -52,6 +59,19 @@ public partial class PlayerBuilding : MonoBehaviour // Data Property
         }
     }
     private int currentIndex;
+    public int CurrentIndex { get => currentIndex; }
+
+    private bool isPlacing;
+    public bool IsPlacing
+    {
+        get => isPlacing;
+        set
+        {
+            if (isPlacing != value)
+                isPlacing = value;
+        }
+    }
+
 }
 
 
@@ -66,20 +86,51 @@ public partial class PlayerBuilding : MonoBehaviour // Initialize
 
         attackRangespriteRenderer.enabled = false;
         PauseParticle();
+        IsPlacing = true;
     }
     public void Initialize()
     {
         Allocate();
         Setup();
         PlayerBuildingAttackDetector.Initialize(this);
+        PlayerBuildingCombat.Initialize(this);
+        PlayerBuildingAnimation.Initialize(this);
     }
     private void Setup()
     {
 
     }
 }
-public partial class PlayerBuilding : MonoBehaviour // 
+
+public partial class PlayerBuilding : MonoBehaviour // Main
 {
+    private void OnEnable()
+    {
+        Enemy.OnEnemyDeath += PlayerBuildingCombat.RemoveEnemy;
+    }
+
+    private void OnDisable()
+    {
+        Enemy.OnEnemyDeath -= PlayerBuildingCombat.RemoveEnemy;
+    }
+
+    private void Update()
+    {
+        PlayerBuildingCombat.Progress();
+    }
+
+    private void LateUpdate()
+    {
+        // PlayerBuildingAnimation.LateProgress();
+    }
+}
+
+public partial class PlayerBuilding : MonoBehaviour // Property
+{
+    public void PlaceBuilding()
+    {
+        IsPlacing = false;
+    }
     public void PlayParticle()
     {
         muzzleParticle.Play();
@@ -92,14 +143,12 @@ public partial class PlayerBuilding : MonoBehaviour //
     public void DrawAttackRange()
     {
         float attackRange = PlayerBuildingInformation.attack_range_array[currentIndex];
-        attackRangespriteRenderer.transform.localScale = new Vector3(attackRange * 2, attackRange * 2, 1);
+        float spriteSize = attackRangespriteRenderer.bounds.size.x;
+        float scaleValue = (attackRange * 2) / spriteSize;
+
+        attackRangespriteRenderer.transform.localScale = new Vector3(scaleValue, scaleValue, 1);
         attackRangespriteRenderer.enabled = true;
 
-    }
-
-    public float GetCurrentAttackRange()
-    {
-        return PlayerBuildingInformation.attack_range_array[currentIndex];
     }
 
     public void EndDrawAttackRange()

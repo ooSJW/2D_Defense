@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 6782404453977878009}
   - component: {fileID: 8345555843118621561}
   - component: {fileID: 1566809801143693783}
+  - component: {fileID: 5835190664614377554}
+  - component: {fileID: 3431252576579294324}
+  - component: {fileID: -8829120577075147245}
   m_Layer: 0
   m_Name: SmallTankB
   m_TagString: Untagged
@@ -32,9 +35,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2482681139409624131}
   - {fileID: 9221898268951211340}
   - {fileID: 264031863583425772}
+  - {fileID: 2482681139409624131}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6782404453977878009
@@ -127,9 +130,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PlayerBuildingAttackDetector>k__BackingField: {fileID: 684774422234528348}
+  <PlayerBuildingCombat>k__BackingField: {fileID: 5835190664614377554}
+  <PlayerBuildingAnimation>k__BackingField: {fileID: 3431252576579294324}
   muzzleParticle: {fileID: 9221898268932859916}
   buildingSpriteRenderer: {fileID: 8345555843118621561}
   attackRangespriteRenderer: {fileID: 2615762506531740398}
+--- !u!114 &5835190664614377554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2813636119211128479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f435fbbdbc642f74f9bda36e97b2f163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTransformList: []
+--- !u!114 &3431252576579294324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2813636119211128479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2363ee47207db1841a353afba50b20a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6782404453977878009}
+--- !u!50 &-8829120577075147245
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2813636119211128479}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &2879960479881662380
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,9 +213,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2879960479881662380}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3076111865965917781}
@@ -206,7 +264,7 @@ SpriteRenderer:
   m_SortingLayerID: 1448525797
   m_SortingLayer: 2
   m_SortingOrder: -1
-  m_Sprite: {fileID: -5240301889137128087, guid: c14665c097f14b14caf0f57089823f8c, type: 3}
+  m_Sprite: {fileID: -6730082499231359840, guid: 55d1f27c687c07f40b78a9099b7ad0fc, type: 3}
   m_Color: {r: 0.24705881, g: 0.58147323, b: 0.85882354, a: 0.14901961}
   m_FlipX: 0
   m_FlipY: 0
@@ -228,7 +286,7 @@ GameObject:
   - component: {fileID: 2482681139409624131}
   - component: {fileID: 684774422234528348}
   - component: {fileID: 8967074105915873578}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerBuildingAttackDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +356,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 5
+  m_Radius: 1
 --- !u!1001 &9221898268951607234
 PrefabInstance:
   m_ObjectHideFlags: 0

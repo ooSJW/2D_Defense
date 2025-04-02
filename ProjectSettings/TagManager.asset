@@ -9,17 +9,18 @@ TagManager:
   - Structable
   - UnStructable
   - FxTemporaire
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PlayerBuildingAttackDetector
   - Water
   - UI
   - Walkable
   - NotWalkable
-  - 
-  - 
+  - Structable
+  - Enemy
   - 
   - 
   - 

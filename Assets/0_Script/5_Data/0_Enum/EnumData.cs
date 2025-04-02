@@ -14,6 +14,7 @@ public enum TagType
     Default,
     Structable,
     UnStructable,
+    Enemy,
 }
 public enum BuildingName
 {
@@ -24,4 +25,29 @@ public enum BuildingName
     MediumTankA,
     MediumTankB,
     MediumTankC
+}
+
+public enum BulletType
+{
+    MachineGun,
+    Cannon,
+}
+public enum BulletName
+{
+    BulletA,
+    BulletB,
+    BulletC,
+    CannonA,
+    CannonB,
+    CannonC,
+}
+
+public enum EnemyName
+{
+    Knight,
+    Merchant,
+    Peasant,
+    Priest,
+    Soldier,
+    Thief,
 }

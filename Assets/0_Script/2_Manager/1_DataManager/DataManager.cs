@@ -10,6 +10,8 @@ public partial class DataManager : MonoBehaviour // Data Field
     public EnemySpawnData EnemySpawnData { get; private set; }
     public PlayerData PlayerData { get; private set; }
     public PlayerBuildingData PlayerBuildingData { get; private set; }
+    public PlayerBulletData PlayerBulletData { get; private set; }
+    public EnemyData EnemyData { get; private set; }
 }
 public partial class DataManager : MonoBehaviour // Initialize
 {
@@ -19,6 +21,8 @@ public partial class DataManager : MonoBehaviour // Initialize
         EnemySpawnData = new EnemySpawnData();
         PlayerData = new PlayerData();
         PlayerBuildingData = new PlayerBuildingData();
+        PlayerBulletData = new PlayerBulletData();
+        EnemyData = new EnemyData();
     }
     public void Initialize()
     {
@@ -31,6 +35,8 @@ public partial class DataManager : MonoBehaviour // Initialize
         EnemySpawnData.Initialize();
         PlayerData.Initialize();
         PlayerBuildingData.Initialize();
+        PlayerBulletData.Initialize();
+        EnemyData.Initialize();
     }
 }
 public partial class DataManager : MonoBehaviour // Property

@@ -630,9 +630,9 @@ GameObject:
   - component: {fileID: 8913117144402691653}
   - component: {fileID: -3383451369278908288}
   - component: {fileID: 2846899937601238911}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Thief
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

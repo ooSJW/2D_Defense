@@ -22,7 +22,10 @@ public partial class UIButtonEvent : MonoBehaviour // Property
         PlayerBuilding building = MainSystem.Instance.PlayerBuildingManager.PlayerBuildingController.SelectedBuilding;
 
         if (building != null)
+        {
             MainSystem.Instance.PoolManager.Despawn(building.gameObject);
+            MainSystem.Instance.PlayerBuildingManager.PlayerBuildingController.SelectedBuilding = null;
+        }
 
         MainSystem.Instance.PlayerBuildingManager.PlayerBuildingController.SelectedBuilding =
             MainSystem.Instance.PoolManager.Spawn(buildingName.ToString(), null, position).GetComponent<PlayerBuilding>();

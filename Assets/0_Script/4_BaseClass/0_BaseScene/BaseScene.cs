@@ -20,9 +20,9 @@ public partial class BaseScene : MonoBehaviour // Data Field
     [SerializeField] private EnemySpawnController enemySpawnController;
     [SerializeField] private EnemyController enemyController;
     [SerializeField] private UIController uiController;
-    // TODO TEST
-    [SerializeField] private GameObject enemyTarget;
-    [SerializeField] private GameObject enemySpawn;
+
+    [field: SerializeField] public GameObject EnemyTarget { get; private set; }
+    [field: SerializeField] public GameObject EnemySpawn { get; private set; }
 
 }
 public partial class BaseScene : MonoBehaviour // Initialize
@@ -88,14 +88,6 @@ public partial class BaseScene : MonoBehaviour // Private Property
         }
 
         Debug.LogWarning($"Check SceneName [currentSceneName : {name}]");
-    }
-}
-
-public partial class BaseScene : MonoBehaviour // Property
-{
-    public Vector3 GetEnemyTargetPosition()
-    {
-        return enemyTarget.transform.position;
     }
 }
 

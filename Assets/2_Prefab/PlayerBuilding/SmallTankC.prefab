@@ -25,9 +25,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6553423607344964206}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2215538707552424303}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 1448525797
   m_SortingLayer: 2
   m_SortingOrder: -1
-  m_Sprite: {fileID: -5240301889137128087, guid: c14665c097f14b14caf0f57089823f8c, type: 3}
+  m_Sprite: {fileID: -6730082499231359840, guid: 55d1f27c687c07f40b78a9099b7ad0fc, type: 3}
   m_Color: {r: 0.24705881, g: 0.58147323, b: 0.85882354, a: 0.14901961}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 2159661369523806065}
   - component: {fileID: 7137821093211124536}
   - component: {fileID: 3694986850777455096}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerBuildingAttackDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,6 +181,9 @@ GameObject:
   - component: {fileID: 4244221787778656488}
   - component: {fileID: 8145295822020396853}
   - component: {fileID: -3235820125466941765}
+  - component: {fileID: 1505501125333843452}
+  - component: {fileID: 2582013907592398712}
+  - component: {fileID: 4848646080581379192}
   m_Layer: 0
   m_Name: SmallTankC
   m_TagString: Untagged
@@ -201,9 +204,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2159661369523806065}
   - {fileID: 873413752333866159}
   - {fileID: 1915972693409745374}
+  - {fileID: 2159661369523806065}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4244221787778656488
@@ -296,9 +299,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PlayerBuildingAttackDetector>k__BackingField: {fileID: 7137821093211124536}
+  <PlayerBuildingCombat>k__BackingField: {fileID: 1505501125333843452}
+  <PlayerBuildingAnimation>k__BackingField: {fileID: 2582013907592398712}
   muzzleParticle: {fileID: 873413752318661103}
   buildingSpriteRenderer: {fileID: 8145295822020396853}
   attackRangespriteRenderer: {fileID: 2860390510358595401}
+--- !u!114 &1505501125333843452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7014417362394510372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f435fbbdbc642f74f9bda36e97b2f163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTransformList: []
+--- !u!114 &2582013907592398712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7014417362394510372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2363ee47207db1841a353afba50b20a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4244221787778656488}
+--- !u!50 &4848646080581379192
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7014417362394510372}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &873413752333733409
 PrefabInstance:
   m_ObjectHideFlags: 0

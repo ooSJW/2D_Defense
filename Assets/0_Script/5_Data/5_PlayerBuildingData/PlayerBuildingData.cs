@@ -11,6 +11,7 @@ public partial class PlayerBuildingData  // Data Field
         public string name;
         public string ui_name;
         public string description;
+        public string usable_bullet_name;
         public int[] damage_array;
         public float[] attack_range_array;
         public float[] attack_delay_array;

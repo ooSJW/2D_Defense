@@ -8,7 +8,7 @@ public partial class EnemyMovement : MonoBehaviour // Data Field
     private NavMeshPath path;
     private Vector3 nextWayPoint;
     private int currentPathIndex;
-    [SerializeField] private float moveSpeed; //TODO TEST
+    private float moveSpeed;
 }
 public partial class EnemyMovement : MonoBehaviour // Initialize
 {
@@ -17,7 +17,7 @@ public partial class EnemyMovement : MonoBehaviour // Initialize
         agent.updateUpAxis = false;
         path = new NavMeshPath();
         currentPathIndex = 0;
-
+        moveSpeed = enemy.EnemyInformation.move_speed;
         if (enemy.TargetPosition != null)
         {
             if (!agent.CalculatePath(enemy.TargetPosition, path))

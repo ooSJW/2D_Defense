@@ -25,9 +25,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3255457949276730371}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4128663039591855176}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 1448525797
   m_SortingLayer: 2
   m_SortingOrder: -1
-  m_Sprite: {fileID: -5240301889137128087, guid: c14665c097f14b14caf0f57089823f8c, type: 3}
+  m_Sprite: {fileID: -6730082499231359840, guid: 55d1f27c687c07f40b78a9099b7ad0fc, type: 3}
   m_Color: {r: 0.24705881, g: 0.58147323, b: 0.85882354, a: 0.14901961}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,6 +99,9 @@ GameObject:
   - component: {fileID: 1251273260511934304}
   - component: {fileID: 5231473913391341056}
   - component: {fileID: 8613720539542619432}
+  - component: {fileID: 5421506022858246386}
+  - component: {fileID: 7243297477971053315}
+  - component: {fileID: 1959558850524106536}
   m_Layer: 0
   m_Name: MediumTankC
   m_TagString: Untagged
@@ -119,9 +122,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4096765674538686628}
   - {fileID: 8082956083059142941}
   - {fileID: 2860619162283038209}
+  - {fileID: 4096765674538686628}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1251273260511934304
@@ -214,9 +217,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PlayerBuildingAttackDetector>k__BackingField: {fileID: 8430213834159325353}
+  <PlayerBuildingCombat>k__BackingField: {fileID: 5421506022858246386}
+  <PlayerBuildingAnimation>k__BackingField: {fileID: 7243297477971053315}
   muzzleParticle: {fileID: 8082956083044987997}
   buildingSpriteRenderer: {fileID: 5231473913391341056}
   attackRangespriteRenderer: {fileID: 958547420334354442}
+--- !u!114 &5421506022858246386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4737547998218809676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f435fbbdbc642f74f9bda36e97b2f163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTransformList: []
+--- !u!114 &7243297477971053315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4737547998218809676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2363ee47207db1841a353afba50b20a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1251273260511934304}
+--- !u!50 &1959558850524106536
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4737547998218809676}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &6971104689884997074
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +286,7 @@ GameObject:
   - component: {fileID: 4096765674538686628}
   - component: {fileID: 8430213834159325353}
   - component: {fileID: 5189423800015509935}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerBuildingAttackDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,12 +351,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 5
+  m_Radius: 0.5
 --- !u!1001 &8082956083059272595
 PrefabInstance:
   m_ObjectHideFlags: 0

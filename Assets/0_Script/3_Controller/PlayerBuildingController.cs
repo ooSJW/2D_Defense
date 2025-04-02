@@ -9,6 +9,8 @@ public partial class PlayerBuildingController : MonoBehaviour // Data Field
     private Color cannotPlaceColor;
 
     private List<PlayerBuilding> activeBuildingList;
+    [SerializeField] private LayerMask structableLayer;
+    [SerializeField] private LayerMask notWlakableLayer;
 }
 
 public partial class PlayerBuildingController : MonoBehaviour // Data Property
@@ -22,9 +24,13 @@ public partial class PlayerBuildingController : MonoBehaviour // Data Property
             if (selectedBuilding != value)
             {
                 selectedBuilding = value;
-                selectedBuilding.Initialize();
                 if (selectedBuilding != null)
+                {
+                    selectedBuilding.Initialize();
                     IsPlacing = true;
+                }
+                else
+                    IsPlacing = false;
             }
         }
     }
@@ -39,11 +45,12 @@ public partial class PlayerBuildingController : MonoBehaviour // Data Property
                 isPlacing = value;
 
             if (isPlacing)
-                SelectedBuilding.DrawAttackRange();
+                selectedBuilding.DrawAttackRange();
             else
             {
-                selectedBuilding.EndDrawAttackRange();
-                selectedBuilding = null;
+                if (selectedBuilding != null)
+                    selectedBuilding.EndDrawAttackRange();
+                SelectedBuilding = null;
             }
         }
     }
@@ -107,15 +114,22 @@ public partial class PlayerBuildingController : MonoBehaviour // Property
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             worldPosition.z = 0;
 
-            RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero, Mathf.Infinity);
-            if (hit.collider.CompareTag(TagType.Structable.ToString()))
+            RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero, Mathf.Infinity, structableLayer);
+            if (hit)
             {
                 SelectedBuilding.SetBuildingColor(true);
                 if (Input.GetMouseButtonDown(0))
                     PlaceBuilding(hit.collider);
             }
             else
+            {
                 SelectedBuilding.SetBuildingColor(false);
+                if (Input.GetMouseButtonDown(0))
+                {
+                    MainSystem.Instance.PoolManager.Despawn(SelectedBuilding.gameObject);
+                    IsPlacing = false;
+                }
+            }
         }
         else
             SelectedBuilding.SetBuildingColor(false);
@@ -123,7 +137,10 @@ public partial class PlayerBuildingController : MonoBehaviour // Property
     public void PlaceBuilding(Collider2D hitCollider)
     {
         SelectedBuilding.transform.position = hitCollider.bounds.center;
-        hitCollider.tag = TagType.UnStructable.ToString();
+        SelectedBuilding.transform.SetParent(hitCollider.transform, true);
+        hitCollider.gameObject.layer = LayerMask.NameToLayer("NotWalkable");
+        SelectedBuilding.PlaceBuilding();
+        activeBuildingList.Add(SelectedBuilding);
         IsPlacing = false;
     }
 }

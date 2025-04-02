@@ -1,0 +1,7 @@
+index,name,move_speed,max_hp,drop_exp,drop_coin
+500,Knight,2,10,4,12
+501,Merchant,1.8,16,6,16
+502,Peasant,1.4,20,8,22
+503,Priest,1.2,50,12,30
+504,Soldier,0.8,70,18,40
+505,Thief,0.5,120,30,56
