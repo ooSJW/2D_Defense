@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ab3550b04770c45b75e511ce8daf0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <BuildingListUI>k__BackingField: {fileID: 6684069100466339803, guid: 9fc8332756e7d6b47bf4ddcf2ab45efb, type: 3}
+  <UIButtonEvent>k__BackingField: {fileID: 0}
+  <EndStageUI>k__BackingField: {fileID: 4702846927230758741, guid: 34a1f94328da2bf4e8df5a000e6af487, type: 3}

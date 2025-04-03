@@ -75,7 +75,6 @@ public partial class BaseScene : MonoBehaviour // Private Property
         currentSceneName = combatScene.FirstOrDefault(elem => elem == SceneName);
         if (currentSceneName != SceneName.None) // CombatScene Initialize
         {
-            MainSystem.Instance.PoolManager.Register();
             MainSystem.Instance.StageManager.SignupStageController(stageController);
             MainSystem.Instance.TileManager.SignupTileController(tileController);
             MainSystem.Instance.PlayerManager.SignupPlayer(player);

@@ -21,8 +21,8 @@ TagManager:
   - NotWalkable
   - Structable
   - Enemy
-  - 
-  - 
+  - DeathEnemy
+  - EnemyTarget
   - 
   - 
   - 

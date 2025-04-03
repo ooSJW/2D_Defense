@@ -36,6 +36,7 @@ public partial class StageManager : MonoBehaviour // Data Property
                     index = value.index,
                     stage_id = value.stage_id,
                     last_sub_stage = value.last_sub_stage,
+                    stage_hp = value.stage_hp,
                     spawn_group_name_array = value.spawn_group_name_array,
                     spawn_group_percent_array = value.spawn_group_percent_array,
                     stage_start_delay = value.stage_start_delay,

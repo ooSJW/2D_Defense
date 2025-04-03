@@ -3,6 +3,7 @@ using UnityEngine;
 public partial class EnemyAnimation : MonoBehaviour // Data Field
 {
     private Enemy enemy;
+    [SerializeField] private Animator animator;
 }
 public partial class EnemyAnimation : MonoBehaviour // Initialize
 {
@@ -27,11 +28,17 @@ public partial class EnemyAnimation : MonoBehaviour // Main
 {
     public void LateProgress()
     {
+        SetAnimation();
         FlipX();
     }
 }
 public partial class EnemyAnimation : MonoBehaviour // Property
 {
+    public void SetAnimation()
+    {
+        animator.SetInteger("State", (int)enemy.EnemyState);
+    }
+
     private void FlipX()
     {
         Vector3 currentPosition = transform.position;
@@ -44,5 +51,10 @@ public partial class EnemyAnimation : MonoBehaviour // Property
             scale.x = -1;
 
         transform.localScale = scale;
+    }
+
+    public void Despawn()
+    {
+        enemy.DespawnSelf();
     }
 }

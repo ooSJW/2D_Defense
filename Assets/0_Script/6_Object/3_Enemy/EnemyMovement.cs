@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using static EnemyData;
 
 public partial class EnemyMovement : MonoBehaviour // Data Field
 {
@@ -62,5 +63,22 @@ public partial class EnemyMovement : MonoBehaviour // Property
     public Vector3 GetNextWayPoint()
     {
         return nextWayPoint;
+    }
+
+    public void ArriveTarget()
+    {
+        int damage = enemy.EnemyInformation.damage;
+
+        MainSystem.Instance.StageManager.StageController.StageHp -= damage;
+        enemy.Death();
+        enemy.DespawnSelf();
+    }
+}
+
+public partial class EnemyMovement : MonoBehaviour // Trigger
+{
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        ArriveTarget();
     }
 }

@@ -14,9 +14,8 @@ public partial class EnemySpawnData // Information
         public string spawn_group_name;
 
         public string[] spawn_enemy_name_array;
-        public float[] spawn_percent_array;
+        public int[] spawn_count_array;
 
-        public int spawn_count;
         public float spawn_delay;
 
         public override bool Equals(object obj)
@@ -26,10 +25,9 @@ public partial class EnemySpawnData // Information
                 return
                     index == other.index &&
                     spawn_group_name == other.spawn_group_name &&
-                    spawn_count == other.spawn_count &&
                     spawn_delay == other.spawn_delay &&
                     spawn_enemy_name_array.SequenceEqual(other.spawn_enemy_name_array) &&
-                    spawn_percent_array.SequenceEqual(other.spawn_percent_array);
+                    spawn_count_array.SequenceEqual(other.spawn_count_array);
             }
             else
                 return false;

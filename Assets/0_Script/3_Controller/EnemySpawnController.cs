@@ -50,5 +50,8 @@ public partial class EnemySpawnController : MonoBehaviour // Property
     public void SetSpawnEnemy(bool value)
     {
         SpawnEnemy = value;
+
+        if (!spawnEnemy)
+            MainSystem.Instance.EnemyManager.EnemyController.CheckStageState();
     }
 }

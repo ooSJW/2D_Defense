@@ -44,9 +44,6 @@ public partial class EnemyManager : MonoBehaviour // Sign
 
     public void SigndownEnemy(Enemy enemy)
     {
-        // TODO TEST
-        MainSystem.Instance.PoolManager.DespawnEnemy(enemy);
-        //
         AllFieldEnemyList.Remove(enemy);
         EnemyController.CheckStageState();
     }

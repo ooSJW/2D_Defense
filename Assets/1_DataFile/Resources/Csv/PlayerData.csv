@@ -1,5 +1,5 @@
 ﻿index,level,max_exp,max_level,unlocked_building_array
-100,1,50,20,SmallTankA SmallTankB
+100,1,50,20,SmallTankA SmallTankB SmallTankC MediumTankA MediumTankB MediumTankC
 101,2,75,20,SmallTankA SmallTankB
 102,3,100,20,SmallTankA SmallTankB
 103,4,125,20,SmallTankA SmallTankB

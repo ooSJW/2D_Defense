@@ -87,7 +87,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: -2191610041109312556}
-  moveSpeed: 3
 --- !u!114 &6962506028621543258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cdd29e69726ac4385244598efd02fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 95000011895321844}
 --- !u!195 &-2191610041109312556
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -27,14 +27,15 @@ public partial class EnemySpawner : MonoBehaviour // Property
     public IEnumerator SpawnEnemies()
     {
         EnemySpawnInformation spawnInfo = MainSystem.Instance.EnemySpawnManager.EnemySpawnInformation;
-        for (int i = 0; i < spawnInfo.spawn_count; i++)
+        for (int i = 0; i < spawnInfo.spawn_enemy_name_array.Length; i++)
         {
-            int randomEnemy = Random.Range(0, spawnInfo.spawn_enemy_name_array.Length);
-            Enemy enemy = MainSystem.Instance.PoolManager.SpawnEnemy(spawnInfo.spawn_enemy_name_array[randomEnemy], transform, transform.position);
-            MainSystem.Instance.EnemyManager.SignupEnemy(enemy);
-            yield return new WaitForSeconds(spawnInfo.spawn_delay);
+            for (int j = 0; j < spawnInfo.spawn_count_array[i]; j++)
+            {
+                Enemy enemy = MainSystem.Instance.PoolManager.SpawnEnemy(spawnInfo.spawn_enemy_name_array[i], transform, transform.position);
+                MainSystem.Instance.EnemyManager.SignupEnemy(enemy);
+                yield return new WaitForSeconds(spawnInfo.spawn_delay);
+            }
         }
-
         MainSystem.Instance.EnemySpawnManager.EnemySpawnController.SetSpawnEnemy(false);
         yield break;
     }

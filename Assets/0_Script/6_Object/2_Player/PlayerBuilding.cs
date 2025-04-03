@@ -92,8 +92,8 @@ public partial class PlayerBuilding : MonoBehaviour // Initialize
     {
         Allocate();
         Setup();
-        PlayerBuildingAttackDetector.Initialize(this);
         PlayerBuildingCombat.Initialize(this);
+        PlayerBuildingAttackDetector.Initialize(this);
         PlayerBuildingAnimation.Initialize(this);
     }
     private void Setup()
@@ -116,12 +116,18 @@ public partial class PlayerBuilding : MonoBehaviour // Main
 
     private void Update()
     {
-        PlayerBuildingCombat.Progress();
+        if (!IsPlacing)
+        {
+            PlayerBuildingCombat.Progress();
+        }
     }
 
     private void LateUpdate()
     {
-        // PlayerBuildingAnimation.LateProgress();
+        if (!IsPlacing)
+        {
+            PlayerBuildingAnimation.LateProgress();
+        }
     }
 }
 

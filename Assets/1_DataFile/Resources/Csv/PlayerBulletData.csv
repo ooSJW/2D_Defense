@@ -1,7 +1,7 @@
 index,name,bullet_type,damage_range,max_hit_object_count
-1100,BulletA,MachineGun,0.3,3
-1101,BulletB,MachineGun,0.3,4
-1102,BulletC,MachineGun,0.3,5
-1103,CannonA,Cannon,1,7
-1104,CannonB,Cannon,2,9
+1100,BulletA,MachineGun,0.3,1
+1101,BulletB,MachineGun,0.3,2
+1102,BulletC,MachineGun,0.3,3
+1103,CannonA,Cannon,1,5
+1104,CannonB,Cannon,2,8
 1105,CannonC,Cannon,3,12

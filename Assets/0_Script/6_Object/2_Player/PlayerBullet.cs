@@ -36,7 +36,6 @@ public partial class PlayerBullet : MonoBehaviour // Main
 {
     private void OnParticleSystemStopped()
     {
-        print("³¡");
         MainSystem.Instance.PoolManager.Despawn(gameObject);
     }
 }

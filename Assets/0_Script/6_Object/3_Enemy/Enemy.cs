@@ -29,6 +29,7 @@ public partial class Enemy : MonoBehaviour // Data Property
                 max_hp = value.max_hp,
                 drop_exp = value.drop_exp,
                 drop_coin = value.drop_coin,
+                damage = value.damage,
             };
             maxHp = value.max_hp;
             hp = value.max_hp;
@@ -36,8 +37,44 @@ public partial class Enemy : MonoBehaviour // Data Property
     }
 
     private int maxHp;
-    private int hp;
 
+    private int hp;
+    public int Hp
+    {
+        get => hp;
+        private set
+        {
+            if (value > 0)
+                hp = value;
+            else
+            {
+                hp = 0;
+                EnemyState = EnemyState.Die;
+            }
+        }
+    }
+
+    private EnemyState enemyState;
+    public EnemyState EnemyState
+    {
+        get => enemyState;
+        private set
+        {
+            if (enemyState != value)
+            {
+                enemyState = value;
+                if (enemyState == EnemyState.Die)
+                {
+                    isAlive = false;
+                    DropReward();
+                    EnemyAnimation.SetAnimation();
+                    Death();
+                }
+            }
+        }
+    }
+
+    private bool isAlive;
 }
 public partial class Enemy : MonoBehaviour // Initialize
 {
@@ -46,9 +83,13 @@ public partial class Enemy : MonoBehaviour // Initialize
         TargetPosition = MainSystem.Instance.SceneManager.ActiveScene.EnemyTarget.transform.position;
 
         if (Enum.TryParse<EnemyName>(name, true, out EnemyName enemyName))
-            enemyInformation = MainSystem.Instance.DataManager.EnemyData.GetData(enemyName);
+            EnemyInformation = MainSystem.Instance.DataManager.EnemyData.GetData(enemyName);
         else
             Debug.LogWarning($"Enemy Name Parse Error [Name : {name}]");
+
+        gameObject.layer = LayerMask.NameToLayer(EnemyLayer.Enemy.ToString());
+        enemyState = EnemyState.Walk;
+        isAlive = true;
     }
     public void Initialize()
     {
@@ -66,11 +107,18 @@ public partial class Enemy : MonoBehaviour // Main
 {
     private void Update()
     {
-        EnemyMovement.Progress();
+        if (isAlive)
+        {
+            EnemyMovement.Progress();
+        }
+
     }
     private void LateUpdate()
     {
-        EnemyAnimation.LateProgress();
+        if (isAlive)
+        {
+            EnemyAnimation.LateProgress();
+        }
     }
 }
 
@@ -78,13 +126,21 @@ public partial class Enemy : MonoBehaviour // Property
 {
     public void GetDamage(int damage)
     {
-        print($"Damage [{damage}]");
-        hp -= damage;
+        Hp -= damage;
     }
-    private void Death()
+    private void DropReward()
     {
+        // TODO¿€º∫ §°
+    }
+    public void Death()
+    {
+        gameObject.layer = LayerMask.NameToLayer(EnemyLayer.DeathEnemy.ToString());
         OnEnemyDeath?.Invoke(transform);
         MainSystem.Instance.EnemyManager.SigndownEnemy(this);
+    }
+
+    public void DespawnSelf()
+    {
         MainSystem.Instance.PoolManager.DespawnEnemy(this);
     }
 }

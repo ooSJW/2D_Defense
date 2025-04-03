@@ -20,8 +20,7 @@ public partial class EnemySpawnManager : MonoBehaviour // Data Property
                     index = value.index,
                     spawn_group_name = value.spawn_group_name,
                     spawn_enemy_name_array = value.spawn_enemy_name_array,
-                    spawn_percent_array = value.spawn_percent_array,
-                    spawn_count = value.spawn_count,
+                    spawn_count_array = value.spawn_count_array,
                     spawn_delay = value.spawn_delay,
                 };
 

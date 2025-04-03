@@ -51,3 +51,14 @@ public enum EnemyName
     Soldier,
     Thief,
 }
+public enum EnemyState
+{
+    Walk,
+    Die,
+}
+
+public enum EnemyLayer
+{
+    Enemy,
+    DeathEnemy,
+}

@@ -13,6 +13,7 @@ public partial class StageData // Information
     {
         public int stage_id;
         public int last_sub_stage;
+        public int stage_hp;
 
         public string[] spawn_group_name_array;
         public float[] spawn_group_percent_array;
@@ -26,6 +27,7 @@ public partial class StageData // Information
                     index == other.index &&
                     stage_id == other.stage_id &&
                     last_sub_stage == other.last_sub_stage &&
+                    stage_hp == other.stage_hp &&
                     stage_start_delay == other.stage_start_delay &&
                     spawn_group_name_array.SequenceEqual(other.spawn_group_name_array) &&
                     spawn_group_percent_array.SequenceEqual(other.spawn_group_percent_array);

@@ -6,19 +6,20 @@ public partial class UIController : MonoBehaviour // Data Field
 {
     [field: SerializeField] public BuildingListUI BuildingListUI { get; private set; } = null;
     [field: SerializeField] public UIButtonEvent UIButtonEvent { get; private set; } = null;
-    [SerializeField] private GameObject endStageUI;
+    [field: SerializeField] public EndStageUI EndStageUI { get; private set; } = null;
 }
 public partial class UIController : MonoBehaviour // Initialize
 {
     private void Allocate()
     {
-        endStageUI.SetActive(false);
-        BuildingListUI.Initialize();
+
     }
     public void Initialize()
     {
         Allocate();
         Setup();
+        BuildingListUI.Initialize();
+        EndStageUI.Initialize();
     }
     private void Setup()
     {
@@ -29,8 +30,8 @@ public partial class UIController : MonoBehaviour // Initialize
 }
 public partial class UIController : MonoBehaviour // 
 {
-    public void EndStage()
+    public void EndStage(bool isClear)
     {
-        endStageUI.SetActive(true);
+        EndStageUI.InitialEndStageUI(isClear);
     }
 }

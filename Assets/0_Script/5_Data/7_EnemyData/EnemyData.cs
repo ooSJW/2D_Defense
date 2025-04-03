@@ -13,6 +13,7 @@ public partial class EnemyData  // Information
         public int max_hp;
         public int drop_exp;
         public int drop_coin;
+        public int damage;
     }
 }
 
