@@ -1,20 +1,43 @@
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public partial class PlayerManager : MonoBehaviour // Data Field
 {
     public Player Player { get; private set; } = null;
 
- 
+
     private PlayerSaveData saveData;
     private string savePath;
 }
+
+public partial class PlayerManager : MonoBehaviour // Data Property
+{
+    private int coin;
+    public int Coin
+    {
+        get => coin;
+        private set
+        {
+            if (coin != value)
+            {
+                if (coin > value) // spendCoin
+                {
+                    coin = value;
+                    SaveData();
+                }
+                else
+                    coin = value;
+            }
+        }
+    }
+}
+
 public partial class PlayerManager : MonoBehaviour // Initialize
 {
     private void Allocate()
     {
         savePath = Path.Combine(Application.persistentDataPath, "PlayerSaveData.json");
-        LoadData();
     }
     public void Initialize()
     {
@@ -28,26 +51,60 @@ public partial class PlayerManager : MonoBehaviour // Initialize
 }
 public partial class PlayerManager : MonoBehaviour // Property
 {
+    public void SpendCoin(int costValue)
+    {
+        if (coin >= costValue)
+            Coin -= costValue;
+    }
+
+    public void GetReawrd(int coinValue = 0, int expValue = 0)
+    {
+        Coin += coinValue;
+        Player.GetExp(expValue);
+    }
+}
+
+public partial class PlayerManager : MonoBehaviour // Data Property
+{
     public void SaveData()
     {
+        if (saveData == null)
+            saveData = new PlayerSaveData();
+
         saveData.level = Player.Level;
         saveData.exp = Player.Exp;
-        saveData.unlocked_building_array = Player.PlayerInformation.unlocked_building_array;
-        // TODO : saveData.coin == 게임 통합 재화, 스테이지에서 사용할 재화는 stageManager나 controller에 따로 작성할거(csv포함);
-        // TODO 25 04 04 여기부터 ㄱㄱ
+        saveData.unlocked_building_array = Player.UnlockedBuildingNameList.Select(building => building.ToString()).ToArray();
+        saveData.coin = coin;
+
         string json = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(savePath, json);
     }
 
-    public void LoadData()
+    public bool HasData()
     {
         if (File.Exists(savePath))
         {
-            string json = File.ReadAllText(savePath);
-            saveData = JsonUtility.FromJson<PlayerSaveData>(json);
+            LoadData();
+            return true;
         }
         else
+        {
             saveData = new PlayerSaveData();
+            return false;
+        }
+    }
+
+    public void LoadData()
+    {
+        string json = File.ReadAllText(savePath);
+        saveData = JsonUtility.FromJson<PlayerSaveData>(json);
+        Player.LoadPlayerData(saveData);
+    }
+
+    public void InitialData()
+    {
+        if (File.Exists(savePath))
+            File.Delete(savePath);
     }
 }
 

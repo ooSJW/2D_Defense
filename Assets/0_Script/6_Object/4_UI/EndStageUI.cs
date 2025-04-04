@@ -13,9 +13,9 @@ public partial class EndStageUI : MonoBehaviour // Initialize
 {
     private void Allocate()
     {
-        gameObject.SetActive(false);
         retryButton.gameObject.SetActive(false);
         nextStageButton.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
     public void Initialize()
     {
@@ -35,7 +35,11 @@ public partial class EndStageUI : MonoBehaviour // Property
         {
             stageMessage.text = "Stage Clear!";
             retryButton.gameObject.SetActive(false);
-            nextStageButton.gameObject.SetActive(true);
+
+            if (MainSystem.Instance.StageManager.IsLastStage)
+                nextStageButton.gameObject.SetActive(false);
+            else
+                nextStageButton.gameObject.SetActive(true);
         }
         else
         {

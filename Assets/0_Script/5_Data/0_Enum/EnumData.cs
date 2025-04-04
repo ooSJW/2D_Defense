@@ -9,6 +9,13 @@ public enum SceneName
     InGameScene,
 }
 
+public enum SceneType
+{
+    Initialize,
+    NotCombat,
+    Combat,
+}
+
 public enum TagType
 {
     Default,

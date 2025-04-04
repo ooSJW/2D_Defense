@@ -4,7 +4,6 @@ using UnityEngine;
 
 public partial class PlayerBuildingData  // Data Field
 {
-    // index,,,,,cost,,
     [System.Serializable]
     public class PlayerBuildingInformation : BaseInformation
     {
@@ -20,6 +19,8 @@ public partial class PlayerBuildingData  // Data Field
         public int upgrad_cost;
         public float resell_cost_percent;
         public int max_level;
+        public int unlock_level;
+        public int unlock_cost;
     }
 }
 

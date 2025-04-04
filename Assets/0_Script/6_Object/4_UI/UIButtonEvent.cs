@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using UnityEngine;
 
 public partial class UIButtonEvent : MonoBehaviour // Data Field 
@@ -29,5 +30,32 @@ public partial class UIButtonEvent : MonoBehaviour // Property
 
         MainSystem.Instance.PlayerBuildingManager.PlayerBuildingController.SelectedBuilding =
             MainSystem.Instance.PoolManager.Spawn(buildingName.ToString(), null, position).GetComponent<PlayerBuilding>();
+    }
+
+    public void OnOffSfx()
+    {
+        MainSystem.Instance.UIManager.UIController.OptionUI.OnOffSfx();
+    }
+
+    public void OnOffBgm()
+    {
+        MainSystem.Instance.UIManager.UIController.OptionUI.OnOffBgm();
+    }
+
+    public void ResetAllJsonFiles()
+    {
+        MainSystem.Instance.PlayerManager.InitialData();
+        MainSystem.Instance.UIManager.InitialData();
+
+        QuitGame();
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+    Application.Quit();
+#endif
     }
 }

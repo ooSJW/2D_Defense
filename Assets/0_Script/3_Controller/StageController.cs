@@ -36,6 +36,7 @@ public partial class StageController : MonoBehaviour // Data property
             }
         }
     }
+
 }
 public partial class StageController : MonoBehaviour // Initialize
 {

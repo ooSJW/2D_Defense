@@ -41,6 +41,8 @@ public partial class PlayerBuilding : MonoBehaviour // Data Property
                 resell_cost_percent = value.resell_cost_percent,
                 max_level = value.max_level,
                 upgrad_cost = value.upgrad_cost,
+                unlock_cost = value.unlock_cost,
+                unlock_level = value.unlock_level,
             };
         }
     }

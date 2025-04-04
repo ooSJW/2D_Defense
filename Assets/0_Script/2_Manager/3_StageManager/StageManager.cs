@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using static StageData;
 
@@ -40,7 +41,9 @@ public partial class StageManager : MonoBehaviour // Data Property
                     spawn_group_name_array = value.spawn_group_name_array,
                     spawn_group_percent_array = value.spawn_group_percent_array,
                     stage_start_delay = value.stage_start_delay,
+                    is_last_stage = value.is_last_stage,
                 };
+                IsLastStage = Convert.ToBoolean(value.is_last_stage);
                 int nameArrayLength, percentArrayLength;
                 nameArrayLength = stageInformation.spawn_group_name_array.Length;
                 percentArrayLength = stageInformation.spawn_group_percent_array.Length;
@@ -52,6 +55,7 @@ public partial class StageManager : MonoBehaviour // Data Property
         }
     }
 
+    public bool IsLastStage { get; private set; } = false;
 }
 public partial class StageManager : MonoBehaviour // Initialize
 {
@@ -74,7 +78,7 @@ public partial class StageManager : MonoBehaviour // Property
 {
     private void GetRandomGroup()
     {
-        float random = Random.Range(0f, 1f);
+        float random = UnityEngine.Random.Range(0f, 1f);
         for (int i = 0; i < stageInformation.spawn_group_percent_array.Length; i++)
         {
             if (random <= stageInformation.spawn_group_percent_array[i])

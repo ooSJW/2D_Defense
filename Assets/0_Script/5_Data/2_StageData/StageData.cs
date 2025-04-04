@@ -14,6 +14,7 @@ public partial class StageData // Information
         public int stage_id;
         public int last_sub_stage;
         public int stage_hp;
+        public int is_last_stage;
 
         public string[] spawn_group_name_array;
         public float[] spawn_group_percent_array;

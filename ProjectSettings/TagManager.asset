@@ -10,6 +10,7 @@ TagManager:
   - UnStructable
   - FxTemporaire
   - Enemy
+  - EnemyTarget
   layers:
   - Default
   - TransparentFX

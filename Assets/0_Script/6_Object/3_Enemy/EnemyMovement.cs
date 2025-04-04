@@ -79,6 +79,7 @@ public partial class EnemyMovement : MonoBehaviour // Trigger
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        ArriveTarget();
+        if (collision.CompareTag("EnemyTarget"))
+            ArriveTarget();
     }
 }

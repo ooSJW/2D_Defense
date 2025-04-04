@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static PlayerData;
 
@@ -90,7 +91,8 @@ public partial class Player : MonoBehaviour // Initialize
     private void Allocate()
     {
         UnlockedBuildingNameList = new List<BuildingName>();
-        Level = PlayerPrefs.GetInt("PlayerLevel", 1);
+        if (MainSystem.Instance.PlayerManager.HasData() == false)
+            Level = 1;
     }
     public void Initialize()
     {
@@ -107,11 +109,25 @@ public partial class Player : MonoBehaviour // Property
 {
     public void UnlockBuilding(string buildingName)
     {
-        BuildingName building = BuildingName.None;
-        if (Enum.TryParse<BuildingName>(buildingName, true, out building))
+        if (Enum.TryParse<BuildingName>(buildingName, true, out BuildingName building))
         {
             if (!UnlockedBuildingNameList.Contains(building) && building != BuildingName.None)
                 UnlockedBuildingNameList.Add(building);
+        }
+    }
+
+    public void GetExp(int expValue = 0)
+    {
+        Exp += expValue;
+    }
+
+    public void LoadPlayerData(PlayerSaveData playerSaveData)
+    {
+        Level = playerSaveData.level;
+        Exp = playerSaveData.exp;
+        foreach (string buildingName in playerSaveData.unlocked_building_array)
+        {
+            UnlockBuilding(buildingName);
         }
     }
 }

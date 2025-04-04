@@ -8,6 +8,7 @@ public partial class BaseScene : MonoBehaviour // Data Field
 {
     private SceneName sceneName;
     public SceneName SceneName { get => sceneName; }
+    public SceneType SceneType { get; private set; }
 
     public List<GameObject> poolableObjectList;
     public List<Enemy> poolableEnemyList;
@@ -57,7 +58,7 @@ public partial class BaseScene : MonoBehaviour // Private Property
 
         if (currentSceneName != SceneName.None) // Check Initialize Scene 
         {
-
+            SceneType = SceneType.Initialize;
             return;
         }
 
@@ -67,6 +68,7 @@ public partial class BaseScene : MonoBehaviour // Private Property
         currentSceneName = notCombatScene.FirstOrDefault(elem => elem == SceneName);
         if (currentSceneName != SceneName.None) // Not CombatScene Initialzie
         {
+            SceneType = SceneType.NotCombat;
             MainSystem.Instance.PlayerManager.SignupPlayer(player);
             MainSystem.Instance.UIManager.SignupUIController(uiController);
             return;
@@ -75,6 +77,7 @@ public partial class BaseScene : MonoBehaviour // Private Property
         currentSceneName = combatScene.FirstOrDefault(elem => elem == SceneName);
         if (currentSceneName != SceneName.None) // CombatScene Initialize
         {
+            SceneType = SceneType.Combat;
             MainSystem.Instance.StageManager.SignupStageController(stageController);
             MainSystem.Instance.TileManager.SignupTileController(tileController);
             MainSystem.Instance.PlayerManager.SignupPlayer(player);
