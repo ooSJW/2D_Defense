@@ -14,16 +14,19 @@ public partial class BaseScene : MonoBehaviour // Data Field
     public List<Enemy> poolableEnemyList;
     private Player player;
 
-    [Header("InGameScene Member")]
+    [Header("CombatScene Member")]
     [SerializeField] private StageController stageController;
     [SerializeField] private TileController tileController;
     [SerializeField] private PlayerBuildingController playerBuildingController;
     [SerializeField] private EnemySpawnController enemySpawnController;
     [SerializeField] private EnemyController enemyController;
-    [SerializeField] private UIController uiController;
-
     [field: SerializeField] public GameObject EnemyTarget { get; private set; }
     [field: SerializeField] public GameObject EnemySpawn { get; private set; }
+
+    [Header("CombatScene && NotCombatScene Member")]
+    [SerializeField] private SoundController soundController;
+    [SerializeField] private UIController uiController;
+
 
 }
 public partial class BaseScene : MonoBehaviour // Initialize
@@ -70,6 +73,7 @@ public partial class BaseScene : MonoBehaviour // Private Property
         {
             SceneType = SceneType.NotCombat;
             MainSystem.Instance.PlayerManager.SignupPlayer(player);
+            MainSystem.Instance.SoundManager.SignupSoundColtroller(soundController);
             MainSystem.Instance.UIManager.SignupUIController(uiController);
             return;
         }
@@ -84,8 +88,8 @@ public partial class BaseScene : MonoBehaviour // Private Property
             MainSystem.Instance.PlayerBuildingManager.SignupPlayerBuildingController(playerBuildingController);
             MainSystem.Instance.EnemySpawnManager.SignupEnemySpawnController(enemySpawnController);
             MainSystem.Instance.EnemyManager.SignupEnemyController(enemyController);
+            MainSystem.Instance.SoundManager.SignupSoundColtroller(soundController);
             MainSystem.Instance.UIManager.SignupUIController(uiController);
-            MainSystem.Instance.StageManager.StageController.CurrentSubStageIndex++;
             return;
         }
 

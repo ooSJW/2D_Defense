@@ -4,11 +4,16 @@ using UnityEngine;
 
 public partial class UIController : MonoBehaviour // Data Field
 {
-    [field: SerializeField] public BuildingListUI BuildingListUI { get; private set; } = null;
     [field: SerializeField] public UIButtonEvent UIButtonEvent { get; private set; } = null;
+    [Header("CombatScene Member")]
+    [field: SerializeField] public BuildingListUI BuildingListUI { get; private set; } = null;
     [field: SerializeField] public EndStageUI EndStageUI { get; private set; } = null;
+
+    [Header("NotCombatScene Member")]
     [field: SerializeField] public PlayerInfoUI PlayerInfoUI { get; private set; } = null;
     [field: SerializeField] public OptionUI OptionUI { get; private set; } = null;
+    [field: SerializeField] public StoreUI StoreUI { get; private set; } = null;
+    [field: SerializeField] public InventoryUI InventoryUI { get; private set; } = null;
 }
 public partial class UIController : MonoBehaviour // Initialize
 {
@@ -29,11 +34,13 @@ public partial class UIController : MonoBehaviour // Initialize
             case SceneType.NotCombat:
                 PlayerInfoUI.Initialize();
                 OptionUI.Initialize();
+                StoreUI.Initialize();
+                InventoryUI.Initialize();
                 break;
             case SceneType.Combat:
                 BuildingListUI.Initialize();
-                SpawnBuilding();
                 EndStageUI.Initialize();
+                SpawnBuilding();
                 break;
         }
     }
@@ -44,11 +51,26 @@ public partial class UIController : MonoBehaviour // Initialize
 }
 public partial class UIController : MonoBehaviour // Not CombatScene Property
 {
-
+    public void OnOffStore()
+    {
+        bool isActive = StoreUI.gameObject.activeSelf;
+        if (isActive)
+            StoreUI.gameObject.SetActive(false);
+        else
+        {
+            StoreUI.RefreshStore();
+            StoreUI.gameObject.SetActive(true);
+        }
+    }
 }
 
 public partial class UIController : MonoBehaviour // CombatScene Property
 {
+    public void RefreshLobbyUI()
+    {
+        StoreUI.RefreshStore();
+        PlayerInfoUI.RefreshPlayerInfoUI();
+    }
     public void SpawnBuilding()
     {
         List<BuildingName> buildingNameList = MainSystem.Instance.PlayerManager.Player.UnlockedBuildingNameList;

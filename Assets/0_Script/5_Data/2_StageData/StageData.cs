@@ -15,6 +15,7 @@ public partial class StageData // Information
         public int last_sub_stage;
         public int stage_hp;
         public int is_last_stage;
+        public int initial_coin;
 
         public string[] spawn_group_name_array;
         public float[] spawn_group_percent_array;
@@ -30,6 +31,7 @@ public partial class StageData // Information
                     last_sub_stage == other.last_sub_stage &&
                     stage_hp == other.stage_hp &&
                     stage_start_delay == other.stage_start_delay &&
+                    initial_coin == other.initial_coin &&
                     spawn_group_name_array.SequenceEqual(other.spawn_group_name_array) &&
                     spawn_group_percent_array.SequenceEqual(other.spawn_group_percent_array);
             }

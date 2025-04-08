@@ -119,7 +119,15 @@ public partial class PlayerBuildingController : MonoBehaviour // Property
             {
                 SelectedBuilding.SetBuildingColor(true);
                 if (Input.GetMouseButtonDown(0))
-                    PlaceBuilding(hit.collider);
+                {
+                    if (MainSystem.Instance.StageManager.SpendCoin(SelectedBuilding.PlayerBuildingInformation.cost))
+                        PlaceBuilding(hit.collider);
+                    else
+                    {
+                        MainSystem.Instance.PoolManager.Despawn(SelectedBuilding.gameObject);
+                        IsPlacing = false;
+                    }
+                }
             }
             else
             {
@@ -142,5 +150,16 @@ public partial class PlayerBuildingController : MonoBehaviour // Property
         SelectedBuilding.PlaceBuilding();
         activeBuildingList.Add(SelectedBuilding);
         IsPlacing = false;
+    }
+
+    public void ResellBuilding()
+    {
+        float reSellPercent = SelectedBuilding.PlayerBuildingInformation.resell_cost_percent;
+        int reSellCost = (int)(SelectedBuilding.TotalCostValue * reSellPercent);
+
+        SelectedBuilding.transform.parent.gameObject.layer = LayerMask.NameToLayer("Structable");
+        activeBuildingList.Remove(SelectedBuilding);
+        MainSystem.Instance.PoolManager.Despawn(SelectedBuilding.gameObject);
+        MainSystem.Instance.StageManager.GetCoin(reSellCost);  // TODO 만들기만했음, 호출해서 실질적 사용 해야함
     }
 }

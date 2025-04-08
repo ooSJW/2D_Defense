@@ -50,7 +50,8 @@ public partial class Player : MonoBehaviour // Data Property
                     string[] unlockBuildingArray = PlayerInformation.unlocked_building_array;
                     for (int i = 0; i < unlockBuildingArray.Length; i++)
                     {
-                        UnlockBuilding(unlockBuildingArray[i]);
+                        if (Enum.TryParse<BuildingName>(unlockBuildingArray[i], true, out BuildingName name))
+                            UnlockBuilding(name);
                     }
                 }
                 catch
@@ -107,13 +108,10 @@ public partial class Player : MonoBehaviour // Initialize
 }
 public partial class Player : MonoBehaviour // Property
 {
-    public void UnlockBuilding(string buildingName)
+    public void UnlockBuilding(BuildingName buildingName)
     {
-        if (Enum.TryParse<BuildingName>(buildingName, true, out BuildingName building))
-        {
-            if (!UnlockedBuildingNameList.Contains(building) && building != BuildingName.None)
-                UnlockedBuildingNameList.Add(building);
-        }
+        if (!UnlockedBuildingNameList.Contains(buildingName) && buildingName != BuildingName.None)
+            UnlockedBuildingNameList.Add(buildingName);
     }
 
     public void GetExp(int expValue = 0)
@@ -127,7 +125,10 @@ public partial class Player : MonoBehaviour // Property
         Exp = playerSaveData.exp;
         foreach (string buildingName in playerSaveData.unlocked_building_array)
         {
-            UnlockBuilding(buildingName);
+            if (Enum.TryParse<BuildingName>(buildingName, true, out BuildingName name))
+                UnlockBuilding(name);
+            else
+                Debug.LogWarning($"Name Parse Error[name : {buildingName}]");
         }
     }
 }

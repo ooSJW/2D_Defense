@@ -13,6 +13,7 @@ public partial class MainSystem : GenericSingleton<MainSystem> // Data Field
     public EnemySpawnManager EnemySpawnManager { get; private set; } = null;
     public EnemyManager EnemyManager { get; private set; } = null;
     public UIManager UIManager { get; private set; } = null;
+    public SoundManager SoundManager { get; private set; } = null;
 }
 public partial class MainSystem : GenericSingleton<MainSystem>// Initialize
 {
@@ -28,6 +29,7 @@ public partial class MainSystem : GenericSingleton<MainSystem>// Initialize
         EnemySpawnManager = gameObject.AddComponent<EnemySpawnManager>();
         EnemyManager = gameObject.AddComponent<EnemyManager>();
         UIManager = gameObject.AddComponent<UIManager>();
+        SoundManager = gameObject.AddComponent<SoundManager>();
     }
     public void Initialize()
     {
@@ -44,6 +46,7 @@ public partial class MainSystem : GenericSingleton<MainSystem>// Initialize
         EnemySpawnManager.Initialize();
         EnemyManager.Initialize();
         UIManager.Initialize();
+        SoundManager.Initialize();
     }
     private void Setup()
     {

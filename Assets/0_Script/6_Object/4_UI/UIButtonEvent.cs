@@ -2,9 +2,6 @@ using System;
 using System.IO;
 using UnityEngine;
 
-public partial class UIButtonEvent : MonoBehaviour // Data Field 
-{
-}
 public partial class UIButtonEvent : MonoBehaviour // Property
 {
     public void OnOffbuildingListUI()
@@ -14,7 +11,8 @@ public partial class UIButtonEvent : MonoBehaviour // Property
 
     public void ChangeScene(int sceneValue)
     {
-        MainSystem.Instance.SceneManager.LoadScene(SceneName.LobbyScene);
+        SceneName sceneName = (SceneName)sceneValue;
+        MainSystem.Instance.SceneManager.LoadScene(sceneName);
     }
 
     public void SelectBuilding(BuildingName buildingName)
@@ -32,6 +30,21 @@ public partial class UIButtonEvent : MonoBehaviour // Property
             MainSystem.Instance.PoolManager.Spawn(buildingName.ToString(), null, position).GetComponent<PlayerBuilding>();
     }
 
+    public void StageStart()
+    {
+        MainSystem.Instance.StageManager.StageController.CurrentSubStageIndex++;
+    }
+
+    public void OnOffStore()
+    {
+        MainSystem.Instance.UIManager.UIController.OnOffStore();
+    }
+
+    public void OnOffInventory()
+    {
+        MainSystem.Instance.UIManager.UIController.InventoryUI.OnOffInventory();
+    }
+
     public void OnOffSfx()
     {
         MainSystem.Instance.UIManager.UIController.OptionUI.OnOffSfx();
@@ -45,7 +58,7 @@ public partial class UIButtonEvent : MonoBehaviour // Property
     public void ResetAllJsonFiles()
     {
         MainSystem.Instance.PlayerManager.InitialData();
-        MainSystem.Instance.UIManager.InitialData();
+        MainSystem.Instance.SoundManager.InitialData();
 
         QuitGame();
     }

@@ -54,4 +54,16 @@ public partial class PlayerBuildingData  // Property
         string name = buildingName.ToString();
         return playerBuildingInfoDicit.FirstOrDefault(elem => elem.Value.name == name).Value;
     }
+
+    public string[] GetAllBuildingName()
+    {
+        string[] names = new string[playerBuildingInfoDicit.Count];
+        int index = 0;
+        foreach (PlayerBuildingInformation info in playerBuildingInfoDicit.Values)
+        {
+            names[index] = info.name;
+            index++;
+        }
+        return names;
+    }
 }

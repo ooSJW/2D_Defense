@@ -30,7 +30,7 @@ public partial class OptionUI : MonoBehaviour // Initialize
     }
     private void Setup()
     {
-        if (!MainSystem.Instance.UIManager.HasData())
+        if (!MainSystem.Instance.SoundManager.HasData())
         {
             isActiveSfx = true;
             isActiveBgm = true;
@@ -68,6 +68,6 @@ public partial class OptionUI : MonoBehaviour // Property
     }
     private void SaveData()
     {
-        MainSystem.Instance.UIManager.SaveData(isActiveSfx, isActiveBgm);
+        MainSystem.Instance.SoundManager.SaveData(isActiveSfx, isActiveBgm);
     }
 }

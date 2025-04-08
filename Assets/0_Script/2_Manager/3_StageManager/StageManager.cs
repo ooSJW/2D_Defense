@@ -38,6 +38,7 @@ public partial class StageManager : MonoBehaviour // Data Property
                     stage_id = value.stage_id,
                     last_sub_stage = value.last_sub_stage,
                     stage_hp = value.stage_hp,
+                    initial_coin = value.initial_coin,
                     spawn_group_name_array = value.spawn_group_name_array,
                     spawn_group_percent_array = value.spawn_group_percent_array,
                     stage_start_delay = value.stage_start_delay,
@@ -45,6 +46,7 @@ public partial class StageManager : MonoBehaviour // Data Property
                 };
                 IsLastStage = Convert.ToBoolean(value.is_last_stage);
                 int nameArrayLength, percentArrayLength;
+                InGameCoin = value.initial_coin;
                 nameArrayLength = stageInformation.spawn_group_name_array.Length;
                 percentArrayLength = stageInformation.spawn_group_percent_array.Length;
                 if (nameArrayLength == percentArrayLength)
@@ -56,6 +58,9 @@ public partial class StageManager : MonoBehaviour // Data Property
     }
 
     public bool IsLastStage { get; private set; } = false;
+
+    private int inGameCoin;
+    public int InGameCoin { get => inGameCoin; private set => inGameCoin = value; }
 }
 public partial class StageManager : MonoBehaviour // Initialize
 {
@@ -87,6 +92,20 @@ public partial class StageManager : MonoBehaviour // Property
                 break;
             }
         }
+    }
+
+    public void GetCoin(int coinAmount)
+    {
+        InGameCoin += coinAmount;
+    }
+    public bool SpendCoin(int coinAmount)
+    {
+        if (InGameCoin >= coinAmount)
+        {
+            InGameCoin -= coinAmount;
+            return true;
+        }
+        return false;
     }
 }
 public partial class StageManager : MonoBehaviour // Sign

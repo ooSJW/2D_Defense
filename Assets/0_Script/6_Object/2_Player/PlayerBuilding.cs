@@ -44,6 +44,7 @@ public partial class PlayerBuilding : MonoBehaviour // Data Property
                 unlock_cost = value.unlock_cost,
                 unlock_level = value.unlock_level,
             };
+            TotalCostValue += value.cost;
         }
     }
 
@@ -53,9 +54,11 @@ public partial class PlayerBuilding : MonoBehaviour // Data Property
         get => level;
         private set
         {
-            if (level != value && value > 0 && value < PlayerBuildingInformation.max_level)
+            if (level != value && value > 0 && value <= PlayerBuildingInformation.max_level)
             {
+                level = value;
                 currentIndex = level > 0 ? level - 1 : 0;
+                TotalCostValue += PlayerBuildingInformation.upgrad_cost;
             }
 
         }
@@ -74,6 +77,8 @@ public partial class PlayerBuilding : MonoBehaviour // Data Property
         }
     }
 
+    private int totalCostValue;
+    public int TotalCostValue { get => totalCostValue; private set => totalCostValue = value; }
 }
 
 
@@ -89,6 +94,7 @@ public partial class PlayerBuilding : MonoBehaviour // Initialize
         attackRangespriteRenderer.enabled = false;
         PauseParticle();
         IsPlacing = true;
+        Level = 1;
     }
     public void Initialize()
     {

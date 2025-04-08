@@ -203,8 +203,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uAE30\uAD00\uCD1D\uC744 \uC0AC\uC6A9\uD558\uB294 \uD3EC\uD0D1\uC785\uB2C8\uB2E4."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d7aaeae7fa0ce2d4883c7e750b982a52, type: 2}
-  m_sharedMaterial: {fileID: 9057500964615972494, guid: d7aaeae7fa0ce2d4883c7e750b982a52, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 048636a18c74a69428f0214708a53f3f, type: 2}
+  m_sharedMaterial: {fileID: 2994581783071570231, guid: 048636a18c74a69428f0214708a53f3f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
