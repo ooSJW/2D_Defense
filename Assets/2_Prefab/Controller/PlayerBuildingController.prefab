@@ -50,3 +50,6 @@ MonoBehaviour:
   notWlakableLayer:
     serializedVersion: 2
     m_Bits: 128
+  playerBuildingLayer:
+    serializedVersion: 2
+    m_Bits: 4096

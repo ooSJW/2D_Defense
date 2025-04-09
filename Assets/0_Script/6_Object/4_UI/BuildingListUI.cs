@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public partial class BuildingListUI : MonoBehaviour // Data Field
@@ -16,6 +17,7 @@ public partial class BuildingListUI : MonoBehaviour // Initialize
     {
         Allocate();
         Setup();
+        SpawnBuilding();
     }
     private void Setup()
     {
@@ -24,6 +26,13 @@ public partial class BuildingListUI : MonoBehaviour // Initialize
 }
 public partial class BuildingListUI : MonoBehaviour // Property
 {
+    public void SpawnBuilding()
+    {
+        List<BuildingName> buildingNameList = MainSystem.Instance.PlayerManager.Player.UnlockedBuildingNameList;
+        for (int i = 0; i < buildingNameList.Count; i++)
+            SpawnBuildingUI(buildingNameList[i]);
+    }
+
     public void SpawnBuildingUI(BuildingName name)
     {
         BuildingUI buildingUI = MainSystem.Instance.PoolManager.Spawn("BuildingUI", contentTransform).GetComponent<BuildingUI>();

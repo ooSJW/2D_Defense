@@ -31,6 +31,19 @@ public partial class StoreUI : MonoBehaviour // Initialize
 
 public partial class StoreUI : MonoBehaviour // Property
 {
+
+    public void OnOffStore()
+    {
+        bool isActive = gameObject.activeSelf;
+        if (isActive)
+            gameObject.SetActive(false);
+        else
+        {
+            RefreshStore();
+            gameObject.SetActive(true);
+        }
+    }
+
     public void StoreObjectFilter()
     {
         string[] allBuildingName = MainSystem.Instance.DataManager.PlayerBuildingData.GetAllBuildingName();

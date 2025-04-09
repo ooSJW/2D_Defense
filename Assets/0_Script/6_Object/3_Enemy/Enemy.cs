@@ -21,16 +21,17 @@ public partial class Enemy : MonoBehaviour // Data Property
         get => enemyInformation;
         private set
         {
-            enemyInformation = new EnemyInformation()
-            {
-                index = value.index,
-                name = value.name,
-                move_speed = value.move_speed,
-                max_hp = value.max_hp,
-                drop_exp = value.drop_exp,
-                drop_coin = value.drop_coin,
-                damage = value.damage,
-            };
+            if (enemyInformation == null || enemyInformation.name != value.name)
+                enemyInformation = new EnemyInformation()
+                {
+                    index = value.index,
+                    name = value.name,
+                    move_speed = value.move_speed,
+                    max_hp = value.max_hp,
+                    drop_exp = value.drop_exp,
+                    drop_coin = value.drop_coin,
+                    damage = value.damage,
+                };
             maxHp = value.max_hp;
             hp = value.max_hp;
         }
@@ -130,7 +131,12 @@ public partial class Enemy : MonoBehaviour // Property
     }
     private void DropReward()
     {
-        // TODO¿€º∫ §°
+        int dropCoin, dropExp;
+        dropCoin = EnemyInformation.drop_coin;
+        dropExp = EnemyInformation.drop_exp;
+
+        MainSystem.Instance.StageManager.GetCoin(dropCoin);
+        MainSystem.Instance.PlayerManager.GetReawrd(0, dropExp);
     }
     public void Death()
     {

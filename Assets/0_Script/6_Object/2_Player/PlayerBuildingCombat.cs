@@ -23,7 +23,7 @@ public partial class PlayerBuildingCombat : MonoBehaviour // Data Property
         get => target;
         private set
         {
-            if (playerBuilding.IsPlacing == false)
+            if (playerBuilding.IsActive)
                 target = value;
             else
                 target = null;

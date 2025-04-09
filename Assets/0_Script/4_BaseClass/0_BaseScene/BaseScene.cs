@@ -55,7 +55,7 @@ public partial class BaseScene : MonoBehaviour // Private Property
     {
         SceneName[] initializeScene = { SceneName.InitializeScene, SceneName.LoadingScene };
         SceneName[] notCombatScene = { SceneName.LobbyScene };
-        SceneName[] combatScene = { SceneName.InGameScene };
+        SceneName[] combatScene = { SceneName.Stage00Scene, SceneName.Stage01Scene, SceneName.Stage02Scene, SceneName.Stage03Scene, SceneName.Stage04Scene, };
 
         SceneName currentSceneName = initializeScene.FirstOrDefault(elem => elem == SceneName);
 

@@ -169,13 +169,13 @@ MonoBehaviour:
   poolableEnemyList: []
   stageController: {fileID: 0}
   tileController: {fileID: 0}
-  playerController: {fileID: 0}
   playerBuildingController: {fileID: 0}
   enemySpawnController: {fileID: 0}
   enemyController: {fileID: 0}
+  <EnemyTarget>k__BackingField: {fileID: 0}
+  <EnemySpawn>k__BackingField: {fileID: 0}
+  soundController: {fileID: 0}
   uiController: {fileID: 0}
-  enemyTarget: {fileID: 0}
-  enemySpawn: {fileID: 0}
   progressBar: {fileID: 1905369769}
   loadingText: {fileID: 1147622473}
 --- !u!1 &159368416
@@ -853,10 +853,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 521181305}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1060, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1905369769
 MonoBehaviour:
@@ -883,7 +883,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.424
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

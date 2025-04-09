@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using UnityEditor.Overlays;
 using UnityEngine;
 
 public partial class UIButtonEvent : MonoBehaviour // Property
@@ -15,19 +16,21 @@ public partial class UIButtonEvent : MonoBehaviour // Property
         MainSystem.Instance.SceneManager.LoadScene(sceneName);
     }
 
+
     public void SelectBuilding(BuildingName buildingName)
     {
         Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         PlayerBuilding building = MainSystem.Instance.PlayerBuildingManager.PlayerBuildingController.SelectedBuilding;
 
-        if (building != null)
+        if (building != null && !building.IsActive)
         {
             MainSystem.Instance.PoolManager.Despawn(building.gameObject);
             MainSystem.Instance.PlayerBuildingManager.PlayerBuildingController.SelectedBuilding = null;
         }
-
+        building = MainSystem.Instance.PoolManager.Spawn(buildingName.ToString(), null, position).GetComponent<PlayerBuilding>();
+        building.Initialize();
         MainSystem.Instance.PlayerBuildingManager.PlayerBuildingController.SelectedBuilding =
-            MainSystem.Instance.PoolManager.Spawn(buildingName.ToString(), null, position).GetComponent<PlayerBuilding>();
+            building;
     }
 
     public void StageStart()
@@ -37,7 +40,7 @@ public partial class UIButtonEvent : MonoBehaviour // Property
 
     public void OnOffStore()
     {
-        MainSystem.Instance.UIManager.UIController.OnOffStore();
+        MainSystem.Instance.UIManager.UIController.StoreUI.OnOffStore();
     }
 
     public void OnOffInventory()
@@ -70,5 +73,11 @@ public partial class UIButtonEvent : MonoBehaviour // Property
 #else
     Application.Quit();
 #endif
+    }
+
+    private void SaveData()
+    {
+        MainSystem.Instance.StageManager.SaveData();
+        MainSystem.Instance.PlayerManager.SaveData();
     }
 }

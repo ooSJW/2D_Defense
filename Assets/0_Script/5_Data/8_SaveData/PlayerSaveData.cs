@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public partial class PlayerSaveData  // Data Field
+public class PlayerSaveData  
 {
     public string name;
     public int level;

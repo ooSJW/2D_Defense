@@ -63,7 +63,7 @@ public partial class StoreBuildingUI : MonoBehaviour // Property
         bool isUnlock = MainSystem.Instance.PlayerManager.Player.UnlockedBuildingNameList.Contains(buildingName);
         if (isUnlock)
         {
-            unlockCostText.text = "Is unlocked";
+            unlockCostText.text = "º¸À¯ Áß";
             buyButton.interactable = false;
             lockObject.SetActive(false);
         }

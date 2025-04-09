@@ -8,12 +8,15 @@ public partial class UIController : MonoBehaviour // Data Field
     [Header("CombatScene Member")]
     [field: SerializeField] public BuildingListUI BuildingListUI { get; private set; } = null;
     [field: SerializeField] public EndStageUI EndStageUI { get; private set; } = null;
+    [field: SerializeField] public PlayerBuildingInfoUI PlayerBuildingInfoUI { get; private set; } = null;
+    [field: SerializeField] public StageInfoUI StageInfoUI { get; private set; } = null;
 
     [Header("NotCombatScene Member")]
     [field: SerializeField] public PlayerInfoUI PlayerInfoUI { get; private set; } = null;
     [field: SerializeField] public OptionUI OptionUI { get; private set; } = null;
     [field: SerializeField] public StoreUI StoreUI { get; private set; } = null;
     [field: SerializeField] public InventoryUI InventoryUI { get; private set; } = null;
+    [field: SerializeField] public LobbyStageUI LobbyStageUI { get; private set; } = null;
 }
 public partial class UIController : MonoBehaviour // Initialize
 {
@@ -36,11 +39,13 @@ public partial class UIController : MonoBehaviour // Initialize
                 OptionUI.Initialize();
                 StoreUI.Initialize();
                 InventoryUI.Initialize();
+                LobbyStageUI.Initialize();
                 break;
             case SceneType.Combat:
                 BuildingListUI.Initialize();
                 EndStageUI.Initialize();
-                SpawnBuilding();
+                PlayerBuildingInfoUI.Initialize();
+                StageInfoUI.Initialize();
                 break;
         }
     }
@@ -51,17 +56,7 @@ public partial class UIController : MonoBehaviour // Initialize
 }
 public partial class UIController : MonoBehaviour // Not CombatScene Property
 {
-    public void OnOffStore()
-    {
-        bool isActive = StoreUI.gameObject.activeSelf;
-        if (isActive)
-            StoreUI.gameObject.SetActive(false);
-        else
-        {
-            StoreUI.RefreshStore();
-            StoreUI.gameObject.SetActive(true);
-        }
-    }
+
 }
 
 public partial class UIController : MonoBehaviour // CombatScene Property
@@ -71,12 +66,7 @@ public partial class UIController : MonoBehaviour // CombatScene Property
         StoreUI.RefreshStore();
         PlayerInfoUI.RefreshPlayerInfoUI();
     }
-    public void SpawnBuilding()
-    {
-        List<BuildingName> buildingNameList = MainSystem.Instance.PlayerManager.Player.UnlockedBuildingNameList;
-        for (int i = 0; i < buildingNameList.Count; i++)
-            BuildingListUI.SpawnBuildingUI(buildingNameList[i]);
-    }
+
     public void EndStage(bool isClear)
     {
         EndStageUI.InitialEndStageUI(isClear);

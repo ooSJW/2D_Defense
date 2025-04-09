@@ -6,7 +6,11 @@ public enum SceneName
     InitializeScene,
     LoadingScene,
     LobbyScene,
-    InGameScene,
+    Stage00Scene,
+    Stage01Scene,
+    Stage02Scene,
+    Stage03Scene,
+    Stage04Scene,
 }
 
 public enum SceneType

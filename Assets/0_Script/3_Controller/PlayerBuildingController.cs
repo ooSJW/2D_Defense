@@ -11,6 +11,7 @@ public partial class PlayerBuildingController : MonoBehaviour // Data Field
     private List<PlayerBuilding> activeBuildingList;
     [SerializeField] private LayerMask structableLayer;
     [SerializeField] private LayerMask notWlakableLayer;
+    [SerializeField] private LayerMask playerBuildingLayer;
 }
 
 public partial class PlayerBuildingController : MonoBehaviour // Data Property
@@ -23,14 +24,20 @@ public partial class PlayerBuildingController : MonoBehaviour // Data Property
         {
             if (selectedBuilding != value)
             {
-                selectedBuilding = value;
                 if (selectedBuilding != null)
+                    selectedBuilding.EndDrawAttackRange();
+
+                if (value != null)
                 {
-                    selectedBuilding.Initialize();
-                    IsPlacing = true;
+                    if (!value.IsActive)
+                        IsPlacing = true;
+                    value.DrawAttackRange();
                 }
                 else
                     IsPlacing = false;
+
+                selectedBuilding = value;
+                MainSystem.Instance.UIManager.UIController.PlayerBuildingInfoUI.ChangePlayerBuilding(selectedBuilding);
             }
         }
     }
@@ -42,15 +49,10 @@ public partial class PlayerBuildingController : MonoBehaviour // Data Property
         private set
         {
             if (isPlacing != value)
-                isPlacing = value;
-
-            if (isPlacing)
-                selectedBuilding.DrawAttackRange();
-            else
             {
-                if (selectedBuilding != null)
-                    selectedBuilding.EndDrawAttackRange();
-                SelectedBuilding = null;
+                isPlacing = value;
+                if (!isPlacing)
+                    SelectedBuilding = null;
             }
         }
     }
@@ -81,6 +83,7 @@ public partial class PlayerBuildingController : MonoBehaviour // Main
     private void Update()
     {
         StartPlaceBuilding();
+        SelectBuilding();
     }
 }
 public partial class PlayerBuildingController : MonoBehaviour // Property
@@ -95,9 +98,29 @@ public partial class PlayerBuildingController : MonoBehaviour // Property
         }
     }
 
+    public void SelectBuilding()
+    {
+        if (!IsPlacing)
+        {
+            if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0))
+            {
+                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero, Mathf.Infinity, playerBuildingLayer);
+                if (hit)
+                {
+                    SelectedBuilding = hit.collider.GetComponent<PlayerBuilding>();
+                }
+                else
+                {
+                    SelectedBuilding = null;
+                }
+            }
+        }
+    }
+
     public void StartPlaceBuilding()
     {
-        if (isPlacing && SelectedBuilding != null)
+        if (IsPlacing && SelectedBuilding != null)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
@@ -124,6 +147,7 @@ public partial class PlayerBuildingController : MonoBehaviour // Property
                         PlaceBuilding(hit.collider);
                     else
                     {
+                        // SelectedBuilding이 cotroller.activeBuildingList에 없을 경우 비활
                         MainSystem.Instance.PoolManager.Despawn(SelectedBuilding.gameObject);
                         IsPlacing = false;
                     }
@@ -154,12 +178,25 @@ public partial class PlayerBuildingController : MonoBehaviour // Property
 
     public void ResellBuilding()
     {
-        float reSellPercent = SelectedBuilding.PlayerBuildingInformation.resell_cost_percent;
-        int reSellCost = (int)(SelectedBuilding.TotalCostValue * reSellPercent);
+        int reSellCost = SelectedBuilding.GetResellCost();
 
         SelectedBuilding.transform.parent.gameObject.layer = LayerMask.NameToLayer("Structable");
         activeBuildingList.Remove(SelectedBuilding);
         MainSystem.Instance.PoolManager.Despawn(SelectedBuilding.gameObject);
-        MainSystem.Instance.StageManager.GetCoin(reSellCost);  // TODO 만들기만했음, 호출해서 실질적 사용 해야함
+        MainSystem.Instance.StageManager.GetCoin(reSellCost);
+        SelectedBuilding = null;
+    }
+
+    public void UpgradBuilding()
+    {
+        int upgradCost = SelectedBuilding.PlayerBuildingInformation.upgrad_cost;
+
+        if (SelectedBuilding.CanUpgrad())
+        {
+            if (MainSystem.Instance.StageManager.SpendCoin(upgradCost))
+            {
+                SelectedBuilding.Upgrad();
+            }
+        }
     }
 }

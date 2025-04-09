@@ -16,6 +16,8 @@ public partial class PlayerBuilding : MonoBehaviour // Data Field
     [SerializeField] private SpriteRenderer attackRangespriteRenderer;
 
     private BuildingName buildingName;
+    private float spriteSize;
+
 }
 
 public partial class PlayerBuilding : MonoBehaviour // Data Property
@@ -58,7 +60,9 @@ public partial class PlayerBuilding : MonoBehaviour // Data Property
             {
                 level = value;
                 currentIndex = level > 0 ? level - 1 : 0;
-                TotalCostValue += PlayerBuildingInformation.upgrad_cost;
+                PlayerBuildingAttackDetector.UpdateAttackRange();
+                PlayerBuildingCombat.UpdateAttackDelay();
+                DrawAttackRange();
             }
 
         }
@@ -66,14 +70,14 @@ public partial class PlayerBuilding : MonoBehaviour // Data Property
     private int currentIndex;
     public int CurrentIndex { get => currentIndex; }
 
-    private bool isPlacing;
-    public bool IsPlacing
+    private bool isActive;
+    public bool IsActive
     {
-        get => isPlacing;
+        get => isActive;
         set
         {
-            if (isPlacing != value)
-                isPlacing = value;
+            if (isActive != value)
+                isActive = value;
         }
     }
 
@@ -91,22 +95,22 @@ public partial class PlayerBuilding : MonoBehaviour // Initialize
         else
             Debug.LogWarning($"Parse Error Check [{name}] prefab Name or Enum field");
 
+        spriteSize = attackRangespriteRenderer.bounds.size.x;
         attackRangespriteRenderer.enabled = false;
         PauseParticle();
-        IsPlacing = true;
-        Level = 1;
     }
     public void Initialize()
     {
         Allocate();
-        Setup();
         PlayerBuildingCombat.Initialize(this);
         PlayerBuildingAttackDetector.Initialize(this);
         PlayerBuildingAnimation.Initialize(this);
+        Setup();
     }
     private void Setup()
     {
-
+        Level = 1;
+        IsActive = false;
     }
 }
 
@@ -124,7 +128,7 @@ public partial class PlayerBuilding : MonoBehaviour // Main
 
     private void Update()
     {
-        if (!IsPlacing)
+        if (IsActive)
         {
             PlayerBuildingCombat.Progress();
         }
@@ -132,7 +136,7 @@ public partial class PlayerBuilding : MonoBehaviour // Main
 
     private void LateUpdate()
     {
-        if (!IsPlacing)
+        if (IsActive)
         {
             PlayerBuildingAnimation.LateProgress();
         }
@@ -143,8 +147,22 @@ public partial class PlayerBuilding : MonoBehaviour // Property
 {
     public void PlaceBuilding()
     {
-        IsPlacing = false;
+        IsActive = true;
     }
+    public bool CanUpgrad()
+    {
+        if (PlayerBuildingInformation.max_level > Level)
+            return true;
+        else
+            return false;
+    }
+
+    public void Upgrad()
+    {
+        Level++;
+        TotalCostValue += PlayerBuildingInformation.upgrad_cost;
+    }
+
     public void PlayParticle()
     {
         muzzleParticle.Play();
@@ -157,12 +175,18 @@ public partial class PlayerBuilding : MonoBehaviour // Property
     public void DrawAttackRange()
     {
         float attackRange = PlayerBuildingInformation.attack_range_array[currentIndex];
-        float spriteSize = attackRangespriteRenderer.bounds.size.x;
         float scaleValue = (attackRange * 2) / spriteSize;
 
-        attackRangespriteRenderer.transform.localScale = new Vector3(scaleValue, scaleValue, 1);
         attackRangespriteRenderer.enabled = true;
+        attackRangespriteRenderer.transform.localScale = new Vector3(scaleValue, scaleValue, 1);
 
+    }
+    public int GetResellCost()
+    {
+        float reSellPercent = PlayerBuildingInformation.resell_cost_percent;
+        int reSellCost = (int)(TotalCostValue * reSellPercent);
+
+        return reSellCost;
     }
 
     public void EndDrawAttackRange()

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using UnityEngine;
 using static StageData;
 
@@ -38,6 +39,7 @@ public partial class StageManager : MonoBehaviour // Data Property
                     stage_id = value.stage_id,
                     last_sub_stage = value.last_sub_stage,
                     stage_hp = value.stage_hp,
+                    map_icon_path = value.map_icon_path,
                     initial_coin = value.initial_coin,
                     spawn_group_name_array = value.spawn_group_name_array,
                     spawn_group_percent_array = value.spawn_group_percent_array,
@@ -46,7 +48,7 @@ public partial class StageManager : MonoBehaviour // Data Property
                 };
                 IsLastStage = Convert.ToBoolean(value.is_last_stage);
                 int nameArrayLength, percentArrayLength;
-                InGameCoin = value.initial_coin;
+                inGameCoin = value.initial_coin;
                 nameArrayLength = stageInformation.spawn_group_name_array.Length;
                 percentArrayLength = stageInformation.spawn_group_percent_array.Length;
                 if (nameArrayLength == percentArrayLength)
@@ -60,19 +62,30 @@ public partial class StageManager : MonoBehaviour // Data Property
     public bool IsLastStage { get; private set; } = false;
 
     private int inGameCoin;
-    public int InGameCoin { get => inGameCoin; private set => inGameCoin = value; }
+    public int InGameCoin
+    {
+        get => inGameCoin;
+        private set
+        {
+            if (inGameCoin != value)
+            {
+                inGameCoin = value;
+                StageController.RefreshInfoUI();
+            }
+        }
+    }
 }
 public partial class StageManager : MonoBehaviour // Initialize
 {
     private void Allocate()
     {
-        StageIndex = 0;
-        print(StageInformation.index);
+        savePath = Path.Combine(Application.persistentDataPath, "StageSaveData.json");
     }
     public void Initialize()
     {
         Allocate();
         Setup();
+        HasData();
     }
     private void Setup()
     {
@@ -107,6 +120,10 @@ public partial class StageManager : MonoBehaviour // Property
         }
         return false;
     }
+    public void ChangeStage(int stageIndex)
+    {
+        StageIndex = stageIndex;
+    }
 }
 public partial class StageManager : MonoBehaviour // Sign
 {
@@ -119,5 +136,74 @@ public partial class StageManager : MonoBehaviour // Sign
     public void SigndownStageController()
     {
         StageController = null;
+    }
+}
+
+public partial class StageManager : MonoBehaviour // Data
+{
+
+    private string savePath;
+    private StageSaveData saveData;
+
+    public void SaveStageScore(int stageId, int stageScore)
+    {
+        if (!saveData.stageScoreDict.ContainsKey(stageId) || saveData.stageScoreDict[stageId] < stageScore)
+        {
+            saveData.stageScoreDict[stageId] = stageScore;
+        }
+        SaveData();
+    }
+
+    public bool IsClearStage(int stageId)
+    {
+        return saveData.stageScoreDict.ContainsKey(stageId);
+    }
+
+    public int GetNextStageToUnlock()
+    {
+        if (saveData.stageScoreDict.Count == 0)
+            return 1;
+
+        int lastCleared = -1;
+
+        foreach (int stageID in saveData.stageScoreDict.Keys)
+        {
+            if (stageID > lastCleared)
+                lastCleared = stageID;
+        }
+
+        return lastCleared + 1;
+    }
+
+    public int LoadStageScore(int stageId)
+    {
+        return saveData.stageScoreDict.ContainsKey(stageId) ? saveData.stageScoreDict[stageId] : 0;
+    }
+
+
+    public void SaveData()
+    {
+        string json = JsonUtility.ToJson(saveData);
+        File.WriteAllText(savePath, json);
+    }
+
+    public bool HasData()
+    {
+        if (File.Exists(savePath))
+        {
+            LoadData();
+            return true;
+        }
+        else
+        {
+            saveData = new StageSaveData();
+            return false;
+        }
+    }
+
+    public void LoadData()
+    {
+        string json = File.ReadAllText(savePath);
+        saveData = JsonUtility.FromJson<StageSaveData>(json);
     }
 }

@@ -48,16 +48,6 @@ public partial class PlayerManager : MonoBehaviour // Initialize
     {
 
     }
-
-    // TODO TEST
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GetReawrd(500, 500);
-            MainSystem.Instance.UIManager.UIController.PlayerInfoUI.RefreshPlayerInfoUI();
-        }
-    }
 }
 public partial class PlayerManager : MonoBehaviour // Property
 {
