@@ -53,6 +53,9 @@ public partial class StageUI : MonoBehaviour // Initialize
         Setup();
         IsUnlock = isUnlockValue;
         RefreshUI();
+        // TODO TEST
+        print("TEST");
+        goStageButton.interactable = true;
     }
     private void Setup()
     {

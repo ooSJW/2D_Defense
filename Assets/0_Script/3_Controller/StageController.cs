@@ -50,6 +50,7 @@ public partial class StageController : MonoBehaviour // Initialize
     {
         Allocate();
         Setup();
+        MainSystem.Instance.StageManager.HasData();
     }
     private void Setup()
     {
@@ -73,6 +74,12 @@ public partial class StageController : MonoBehaviour // Property
 
 public partial class StageController : MonoBehaviour // Coroutine
 {
+    //TODO TEST
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            CurrentSubStageIndex++;
+    }
     public IEnumerator WaitForNexStage()
     {
         float delayTime = MainSystem.Instance.StageManager.StageInformation.stage_start_delay;
@@ -82,12 +89,16 @@ public partial class StageController : MonoBehaviour // Coroutine
     }
     public IEnumerator EndStage(bool isClear)
     {
+        if (isClear)
+            MainSystem.Instance.StageManager.SaveStageScore(MainSystem.Instance.StageManager.StageInformation.stage_id, GetScore());
+
+        MainSystem.Instance.PlayerManager.GetReawrd(MainSystem.Instance.StageManager.InGameCoin, 0);
+
         yield return new WaitForSeconds(MainSystem.Instance.StageManager.StageInformation.stage_start_delay);
 
         MainSystem.Instance.UIManager.UIController.EndStage(isClear);
 
 
-        MainSystem.Instance.StageManager.SaveStageScore(MainSystem.Instance.StageManager.StageInformation.stage_id, GetScore());
         yield break;
     }
 

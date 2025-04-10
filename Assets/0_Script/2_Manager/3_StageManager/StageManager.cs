@@ -183,6 +183,8 @@ public partial class StageManager : MonoBehaviour // Data
 
     public void SaveData()
     {
+        saveData.FromDictionary();
+
         string json = JsonUtility.ToJson(saveData);
         File.WriteAllText(savePath, json);
     }
@@ -205,5 +207,7 @@ public partial class StageManager : MonoBehaviour // Data
     {
         string json = File.ReadAllText(savePath);
         saveData = JsonUtility.FromJson<StageSaveData>(json);
+
+        saveData.ToDictionary();
     }
 }

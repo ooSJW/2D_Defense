@@ -19,16 +19,8 @@ public partial class PlayerManager : MonoBehaviour // Data Property
         get => coin;
         private set
         {
-            if (coin != value)
-            {
-                if (coin > value) // spendCoin
-                {
-                    coin = value;
-                    SaveData();
-                }
-                else
-                    coin = value;
-            }
+            coin = value;
+            SaveData();
         }
     }
 }
@@ -59,8 +51,8 @@ public partial class PlayerManager : MonoBehaviour // Property
 
     public void GetReawrd(int coinValue = 0, int expValue = 0)
     {
-        Coin += coinValue;
         Player.GetExp(expValue);
+        Coin += coinValue;
     }
 }
 
