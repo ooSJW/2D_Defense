@@ -135,4 +135,14 @@ public partial class DataManager : MonoBehaviour // Property
 
 
     #endregion
+
+
+    #region SaveData
+    public void SaveData()
+    {
+        MainSystem.Instance.StageManager.SaveData();
+        MainSystem.Instance.PlayerManager.SaveData();
+        MainSystem.Instance.SoundManager.SaveData();
+    }
+    #endregion
 }

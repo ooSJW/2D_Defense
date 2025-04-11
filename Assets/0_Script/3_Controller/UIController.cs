@@ -5,6 +5,8 @@ using UnityEngine;
 public partial class UIController : MonoBehaviour // Data Field
 {
     [field: SerializeField] public UIButtonEvent UIButtonEvent { get; private set; } = null;
+    [field: SerializeField] public DialogueUI DialogueUI { get; private set; } = null;
+
     [Header("CombatScene Member")]
     [field: SerializeField] public BuildingListUI BuildingListUI { get; private set; } = null;
     [field: SerializeField] public EndStageUI EndStageUI { get; private set; } = null;
@@ -42,6 +44,7 @@ public partial class UIController : MonoBehaviour // Initialize
                 LobbyStageUI.Initialize();
                 break;
             case SceneType.Combat:
+                OptionUI.Initialize();
                 BuildingListUI.Initialize();
                 EndStageUI.Initialize();
                 PlayerBuildingInfoUI.Initialize();
@@ -54,12 +57,7 @@ public partial class UIController : MonoBehaviour // Initialize
 
     }
 }
-public partial class UIController : MonoBehaviour // Not CombatScene Property
-{
-
-}
-
-public partial class UIController : MonoBehaviour // CombatScene Property
+public partial class UIController : MonoBehaviour // Property
 {
     public void RefreshLobbyUI()
     {
@@ -70,5 +68,10 @@ public partial class UIController : MonoBehaviour // CombatScene Property
     public void EndStage(bool isClear)
     {
         EndStageUI.InitialEndStageUI(isClear);
+    }
+
+    public void ActiveDialogue()
+    {
+        DialogueUI.gameObject.SetActive(true);
     }
 }

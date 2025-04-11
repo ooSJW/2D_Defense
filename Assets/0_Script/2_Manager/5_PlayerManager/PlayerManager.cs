@@ -20,7 +20,6 @@ public partial class PlayerManager : MonoBehaviour // Data Property
         private set
         {
             coin = value;
-            SaveData();
         }
     }
 }
@@ -47,18 +46,19 @@ public partial class PlayerManager : MonoBehaviour // Property
     {
         if (coin >= costValue)
             Coin -= costValue;
+        SavePlayerData();
     }
 
     public void GetReawrd(int coinValue = 0, int expValue = 0)
     {
-        Player.GetExp(expValue);
         Coin += coinValue;
+        Player.GetExp(expValue);
     }
 }
 
 public partial class PlayerManager : MonoBehaviour // Data Property
 {
-    public void SaveData()
+    public void SavePlayerData()
     {
         if (saveData == null)
             saveData = new PlayerSaveData();
@@ -68,6 +68,11 @@ public partial class PlayerManager : MonoBehaviour // Data Property
         saveData.unlocked_building_array = Player.UnlockedBuildingNameList.Select(building => building.ToString()).ToArray();
         saveData.coin = coin;
 
+        SaveData();
+    }
+
+    public void SaveData()
+    {
         string json = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(savePath, json);
     }
@@ -90,7 +95,7 @@ public partial class PlayerManager : MonoBehaviour // Data Property
     {
         string json = File.ReadAllText(savePath);
         saveData = JsonUtility.FromJson<PlayerSaveData>(json);
-        Coin = saveData.coin;
+        coin = saveData.coin;
         Player.LoadPlayerData(saveData);
     }
 

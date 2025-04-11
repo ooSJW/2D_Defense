@@ -53,9 +53,6 @@ public partial class StageUI : MonoBehaviour // Initialize
         Setup();
         IsUnlock = isUnlockValue;
         RefreshUI();
-        // TODO TEST
-        print("TEST");
-        goStageButton.interactable = true;
     }
     private void Setup()
     {
@@ -66,6 +63,7 @@ public partial class StageUI : MonoBehaviour // Property
 {
     public void RefreshUI()
     {
+        mapImage.sprite = Resources.Load<Sprite>($"Icon/{stageInformation.map_icon_path}");
         stageNameText.text = $"Stage{stageInformation.stage_id}";
         descriptionText.text = $"StageHp : {stageInformation.stage_hp}\n지급 골드 : {stageInformation.initial_coin}\n몬스터 웨이브 : {stageInformation.last_sub_stage}";
     }

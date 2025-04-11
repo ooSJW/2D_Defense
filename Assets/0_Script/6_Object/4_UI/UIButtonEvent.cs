@@ -61,8 +61,9 @@ public partial class UIButtonEvent : MonoBehaviour // Property
     public void ResetAllJsonFiles()
     {
         MainSystem.Instance.PlayerManager.InitialData();
+        MainSystem.Instance.StageManager.InitialData();
         MainSystem.Instance.SoundManager.InitialData();
-
+        PlayerPrefs.DeleteAll();
         QuitGame();
     }
 
@@ -75,9 +76,4 @@ public partial class UIButtonEvent : MonoBehaviour // Property
 #endif
     }
 
-    private void SaveData()
-    {
-        MainSystem.Instance.StageManager.SaveData();
-        MainSystem.Instance.PlayerManager.SaveData();
-    }
 }

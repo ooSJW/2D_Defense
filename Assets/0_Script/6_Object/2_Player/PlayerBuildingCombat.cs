@@ -30,11 +30,15 @@ public partial class PlayerBuildingCombat : MonoBehaviour // Data Property
         }
 
     }
+
+    private bool isCooldown;
+    public bool IsCooldown { get => isCooldown; }
 }
 public partial class PlayerBuildingCombat : MonoBehaviour // Initialize
 {
     private void Allocate()
     {
+        isCooldown = false;
         enemyTransformList = new List<Transform>();
 
         string usableBulletName = playerBuilding.PlayerBuildingInformation.usable_bullet_name;
@@ -60,7 +64,8 @@ public partial class PlayerBuildingCombat : MonoBehaviour // Main
 {
     public void Progress()
     {
-        Attack();
+        SetTarget();
+        AttackCooldown();
     }
 }
 
@@ -68,23 +73,34 @@ public partial class PlayerBuildingCombat : MonoBehaviour // Property
 {
     private void Attack()
     {
+        if (Target != null)
+        {
+            playerBuilding.PlayerBuildingAnimation.AttackTrigger();
+            PlayerBullet bullet = MainSystem.Instance.PoolManager.Spawn(playerBulletInformation.name, null, Target.position).GetComponent<PlayerBullet>();
+            bullet.Initialize(playerBulletInformation, playerBuilding.PlayerBuildingInformation.damage_array[playerBuilding.CurrentIndex]);
+            isCooldown = true;
+            timer = 0;
+        }
+    }
+
+    public void SetTarget()
+    {
         if (enemyTransformList.Count > 0)
             Target = enemyTransformList[0];
         else
             Target = null;
-
-        if (Target != null)
+    }
+    public void AttackCooldown()
+    {
+        if (isCooldown)
         {
             timer += Time.deltaTime;
             if (timer >= attackDelay)
-            {
-                playerBuilding.PlayerBuildingAnimation.AttackTrigger();
-                // TODO TEST
-                PlayerBullet bullet = MainSystem.Instance.PoolManager.Spawn(playerBulletInformation.name, null, Target.position).GetComponent<PlayerBullet>();
-                bullet.Initialize(playerBulletInformation, playerBuilding.PlayerBuildingInformation.damage_array[playerBuilding.CurrentIndex]);
-                timer = 0;
-            }
+                isCooldown = false;
         }
+        else
+            Attack();
+
     }
 
     public void UpdateAttackDelay()

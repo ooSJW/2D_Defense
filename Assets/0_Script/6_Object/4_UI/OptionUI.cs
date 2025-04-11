@@ -11,9 +11,12 @@ public partial class OptionUI : MonoBehaviour // Data Field
     private Sprite onSwitchImage;
     private Sprite offSwitchImage;
 
+    [Header("CombatSceneMember")]
+    [SerializeField] private Button lobbyButton;
+
     [Header("LobbyMember")]
-    [SerializeField] private GameObject dataInitialUI;
-    [SerializeField] private GameObject quitGameUI;
+    [SerializeField] private Button dataInitialButton;
+    [SerializeField] private Button quitGameButton;
 }
 public partial class OptionUI : MonoBehaviour // Initialize
 {
@@ -22,6 +25,10 @@ public partial class OptionUI : MonoBehaviour // Initialize
         onSwitchImage = Resources.Load<Sprite>("Icon/SwitchOn");
         offSwitchImage = Resources.Load<Sprite>("Icon/SwitchOff");
         gameObject.SetActive(false);
+
+        dataInitialButton.gameObject.SetActive(false);
+        quitGameButton.gameObject.SetActive(false);
+        lobbyButton.gameObject.SetActive(false);
     }
     public void Initialize()
     {
@@ -35,12 +42,19 @@ public partial class OptionUI : MonoBehaviour // Initialize
             isActiveSfx = true;
             isActiveBgm = true;
             SaveData();
-            // TODO 25 04 04 소리 끄기 켜기 데이터 세이브로드, 플ㄹ레이어 세이브 로드 만들었음, 
-            // 생각해보고 구조 이상하면 다시 만들기 
-            // 이상없을 시 스테이지 기본 지급 골드 작성 및 enemy dropReward 구현, 건물 배치 시 재화 차감
-            // 포탑 해금 시 저장 및 재화 차감 구현 해야함
         }
 
+        SceneType sceneType = MainSystem.Instance.SceneManager.ActiveScene.SceneType;
+        switch (sceneType)
+        {
+            case SceneType.NotCombat:
+                dataInitialButton.gameObject.SetActive(true);
+                quitGameButton.gameObject.SetActive(true);
+                break;
+            case SceneType.Combat:
+                lobbyButton.gameObject.SetActive(true);
+                break;
+        }
     }
 }
 public partial class OptionUI : MonoBehaviour // Property
@@ -68,6 +82,6 @@ public partial class OptionUI : MonoBehaviour // Property
     }
     private void SaveData()
     {
-        MainSystem.Instance.SoundManager.SaveData(isActiveSfx, isActiveBgm);
+        MainSystem.Instance.SoundManager.SaveSoundData(isActiveSfx, isActiveBgm);
     }
 }

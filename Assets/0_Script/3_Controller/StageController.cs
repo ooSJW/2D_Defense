@@ -12,12 +12,20 @@ public partial class StageController : MonoBehaviour // Data property
         {
             if (currentSubStageIndex != value && stageHp > 0)
             {
+                int lastStageIndex = MainSystem.Instance.StageManager.StageInformation.last_sub_stage;
+                if (lastStageIndex + 1 < value)
+                    return;
                 currentSubStageIndex = value;
-                RefreshInfoUI();
-                if (MainSystem.Instance.StageManager.StageInformation.last_sub_stage >= currentSubStageIndex)
+                if (lastStageIndex >= currentSubStageIndex)
+                {
+                    RefreshInfoUI();
                     StartCoroutine(WaitForNexStage());
+                }
                 else
+                {
+                    RefreshInfoUI(true);
                     StartCoroutine(EndStage(true));
+                }
             }
         }
     }
@@ -59,11 +67,11 @@ public partial class StageController : MonoBehaviour // Initialize
 }
 public partial class StageController : MonoBehaviour // Property
 {
-    public void RefreshInfoUI()
+    public void RefreshInfoUI(bool isClear = false)
     {
         try
         {
-            MainSystem.Instance.UIManager.UIController.StageInfoUI.RefreshInfoUI();
+            MainSystem.Instance.UIManager.UIController.StageInfoUI.RefreshInfoUI(isClear);
         }
         catch
         {
@@ -74,31 +82,28 @@ public partial class StageController : MonoBehaviour // Property
 
 public partial class StageController : MonoBehaviour // Coroutine
 {
-    //TODO TEST
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            CurrentSubStageIndex++;
-    }
     public IEnumerator WaitForNexStage()
     {
         float delayTime = MainSystem.Instance.StageManager.StageInformation.stage_start_delay;
-        yield return new WaitForSeconds(delayTime);
+        yield return StartCoroutine(MainSystem.Instance.UIManager.UIController.StageInfoUI.Countdown(delayTime));
         MainSystem.Instance.EnemySpawnManager.EnemySpawnController.SetSpawnEnemy(true);
         yield break;
     }
     public IEnumerator EndStage(bool isClear)
     {
+
+        MainSystem.Instance.PlayerManager.GetReawrd((int)(MainSystem.Instance.StageManager.InGameCoin * 0.5f), 0);
+        MainSystem.Instance.PlayerManager.SavePlayerData();
+        MainSystem.Instance.DataManager.SaveData();
+
+
+        StageInformation info = MainSystem.Instance.StageManager.StageInformation;
         if (isClear)
-            MainSystem.Instance.StageManager.SaveStageScore(MainSystem.Instance.StageManager.StageInformation.stage_id, GetScore());
+            MainSystem.Instance.StageManager.SaveStageScore(info.stage_id, GetScore());
 
-        MainSystem.Instance.PlayerManager.GetReawrd(MainSystem.Instance.StageManager.InGameCoin, 0);
-
-        yield return new WaitForSeconds(MainSystem.Instance.StageManager.StageInformation.stage_start_delay);
+        yield return MainSystem.Instance.UIManager.UIController.StageInfoUI.EndStage(isClear, info.stage_start_delay, info.stage_id);
 
         MainSystem.Instance.UIManager.UIController.EndStage(isClear);
-
-
         yield break;
     }
 

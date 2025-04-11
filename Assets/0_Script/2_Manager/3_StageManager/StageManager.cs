@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System;
 using System.IO;
 using UnityEngine;
@@ -147,44 +148,37 @@ public partial class StageManager : MonoBehaviour // Data
 
     public void SaveStageScore(int stageId, int stageScore)
     {
-        if (!saveData.stageScoreDict.ContainsKey(stageId) || saveData.stageScoreDict[stageId] < stageScore)
+        StageScoreData existingData = saveData.stageScoreDataList.Find(elem => elem.stageId == stageId);
+        if (existingData != null)
         {
-            saveData.stageScoreDict[stageId] = stageScore;
+            if (existingData.stageScore < stageScore)
+                existingData.stageScore = stageScore;
         }
+        else
+            saveData.stageScoreDataList.Add(new StageScoreData(stageId, stageScore));
+
         SaveData();
     }
 
     public bool IsClearStage(int stageId)
     {
-        return saveData.stageScoreDict.ContainsKey(stageId);
+        return saveData.stageScoreDataList.Find(elem => elem.stageId == stageId) != null;
     }
 
     public int GetNextStageToUnlock()
     {
-        if (saveData.stageScoreDict.Count == 0)
-            return 1;
-
-        int lastCleared = -1;
-
-        foreach (int stageID in saveData.stageScoreDict.Keys)
-        {
-            if (stageID > lastCleared)
-                lastCleared = stageID;
-        }
-
-        return lastCleared + 1;
+        return saveData.stageScoreDataList.Count + 1;
     }
 
     public int LoadStageScore(int stageId)
     {
-        return saveData.stageScoreDict.ContainsKey(stageId) ? saveData.stageScoreDict[stageId] : 0;
+        StageScoreData data = saveData.stageScoreDataList.Find(elem => elem.stageId == stageId);
+        return data != null ? data.stageScore : 0;
     }
 
 
     public void SaveData()
     {
-        saveData.FromDictionary();
-
         string json = JsonUtility.ToJson(saveData);
         File.WriteAllText(savePath, json);
     }
@@ -207,7 +201,11 @@ public partial class StageManager : MonoBehaviour // Data
     {
         string json = File.ReadAllText(savePath);
         saveData = JsonUtility.FromJson<StageSaveData>(json);
+    }
 
-        saveData.ToDictionary();
+    public void InitialData()
+    {
+        if (File.Exists(savePath))
+            File.Delete(savePath);
     }
 }

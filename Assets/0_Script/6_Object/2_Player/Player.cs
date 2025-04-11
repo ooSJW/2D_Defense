@@ -111,7 +111,10 @@ public partial class Player : MonoBehaviour // Property
     public void UnlockBuilding(BuildingName buildingName)
     {
         if (!UnlockedBuildingNameList.Contains(buildingName) && buildingName != BuildingName.None)
+        {
             UnlockedBuildingNameList.Add(buildingName);
+            UnlockedBuildingNameList.Sort();
+        }
     }
 
     public void GetExp(int expValue = 0)

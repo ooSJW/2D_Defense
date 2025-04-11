@@ -28,7 +28,7 @@ public partial class SoundManager : MonoBehaviour // Initialize
 }
 public partial class SoundManager : MonoBehaviour // Sign
 {
-    public void SaveData(bool sfx, bool bgm)
+    public void SaveSoundData(bool sfx, bool bgm)
     {
         if (saveData == null)
             saveData = new SoundSaveData();
@@ -36,6 +36,10 @@ public partial class SoundManager : MonoBehaviour // Sign
         saveData.isActiveSfx = sfx ? 1 : 0;
         saveData.isActiveBgm = bgm ? 1 : 0;
 
+        SaveData();
+    }
+    public void SaveData()
+    {
         string json = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(savePath, json);
     }

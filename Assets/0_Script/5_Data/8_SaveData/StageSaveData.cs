@@ -5,17 +5,18 @@ using UnityEngine;
 [System.Serializable]
 public class StageSaveData
 {
-    public Dictionary<int, int> stageScoreDict = new Dictionary<int, int>();
-    public List<KeyValuePair<int, int>> stageScoreList = new List<KeyValuePair<int, int>>();
-    // TODO 저장 불러오기 야랄남
-    // 04 11 여기부터
-    public void FromDictionary()
-    {
-        stageScoreList = stageScoreDict.ToList();
-    }
+    public List<StageScoreData> stageScoreDataList = new List<StageScoreData>();
+}
 
-    public void ToDictionary()
+[System.Serializable]
+public class StageScoreData
+{
+    public int stageId;
+    public int stageScore;
+
+    public StageScoreData(int stageId, int stageScore)
     {
-        stageScoreDict = stageScoreList.ToDictionary(pair => pair.Key, pair => pair.Value);
+        this.stageId = stageId;
+        this.stageScore = stageScore;
     }
 }
