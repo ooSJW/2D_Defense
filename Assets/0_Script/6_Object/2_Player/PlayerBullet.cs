@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static PlayerBulletData;
@@ -11,12 +12,16 @@ public partial class PlayerBullet : MonoBehaviour // Data Field
     private PlayerBulletInformation playerBulletInformation;
     private List<Enemy> hitEnemyList;
     private int damage;
+
+    private SoundEffectName clipName;
 }
 public partial class PlayerBullet : MonoBehaviour // Initialize
 {
     private void Allocate()
     {
         hitEnemyList = new List<Enemy>();
+
+        clipName = Enum.Parse<SoundEffectName>(playerBulletInformation.sound_clip_name, true);
     }
     public void Initialize(PlayerBulletInformation bulletInfo, int ownerDamage)
     {
@@ -45,7 +50,7 @@ public partial class PlayerBullet : MonoBehaviour // Property
     public void PlayEffectWithDamage()
     {
         hitEnemyList.Clear();
-
+        MainSystem.Instance.SoundManager.SoundController.PlaySoundSffect(clipName);
         Vector2 boxSize = new Vector2(playerBulletInformation.damage_range, 1f);
         Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxSize, 0f, enemyLayer);
 

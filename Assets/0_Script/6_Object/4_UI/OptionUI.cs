@@ -59,12 +59,12 @@ public partial class OptionUI : MonoBehaviour // Initialize
 }
 public partial class OptionUI : MonoBehaviour // Property
 {
-    public void LoadData(bool isActiveSfx, bool isActiveBgm)
+    public void SetImage()
     {
+        isActiveSfx = MainSystem.Instance.SoundManager.IsActiveSfx;
+        isActiveBgm = MainSystem.Instance.SoundManager.IsActiveBgm;
         sfxBtnImage.sprite = isActiveSfx ? onSwitchImage : offSwitchImage;
         bgmBtnImage.sprite = isActiveBgm ? onSwitchImage : offSwitchImage;
-        this.isActiveSfx = isActiveSfx;
-        this.isActiveBgm = isActiveBgm;
     }
 
     public void OnOffSfx()

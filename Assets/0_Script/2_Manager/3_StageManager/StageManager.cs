@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using UnityEngine;
 using static StageData;
+using static UnityEngine.Rendering.DebugUI;
 
 public partial class StageManager : MonoBehaviour // Data Property
 {
@@ -47,15 +48,7 @@ public partial class StageManager : MonoBehaviour // Data Property
                     stage_start_delay = value.stage_start_delay,
                     is_last_stage = value.is_last_stage,
                 };
-                IsLastStage = Convert.ToBoolean(value.is_last_stage);
-                int nameArrayLength, percentArrayLength;
-                inGameCoin = value.initial_coin;
-                nameArrayLength = stageInformation.spawn_group_name_array.Length;
-                percentArrayLength = stageInformation.spawn_group_percent_array.Length;
-                if (nameArrayLength == percentArrayLength)
-                    GetRandomGroup();
-                else
-                    Debug.LogWarning($"Check arrayLength\n[name_array.Length] : {nameArrayLength}\n[percent_array.Length] : {percentArrayLength}");
+                SetStage();
             }
         }
     }
@@ -124,6 +117,19 @@ public partial class StageManager : MonoBehaviour // Property
     public void ChangeStage(int stageIndex)
     {
         StageIndex = stageIndex;
+    }
+
+    public void SetStage()
+    {
+        IsLastStage = Convert.ToBoolean(stageInformation.is_last_stage);
+        int nameArrayLength, percentArrayLength;
+        inGameCoin = stageInformation.initial_coin;
+        nameArrayLength = stageInformation.spawn_group_name_array.Length;
+        percentArrayLength = stageInformation.spawn_group_percent_array.Length;
+        if (nameArrayLength == percentArrayLength)
+            GetRandomGroup();
+        else
+            Debug.LogWarning($"Check arrayLength\n[name_array.Length] : {nameArrayLength}\n[percent_array.Length] : {percentArrayLength}");
     }
 }
 public partial class StageManager : MonoBehaviour // Sign

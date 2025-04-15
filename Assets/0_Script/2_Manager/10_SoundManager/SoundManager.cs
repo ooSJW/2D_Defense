@@ -10,6 +10,37 @@ public partial class SoundManager : MonoBehaviour // Data Field
     private SoundSaveData saveData;
     private string savePath;
 }
+
+public partial class SoundManager : MonoBehaviour // Data Property
+{
+    private bool isActiveSfx;
+    public bool IsActiveSfx
+    {
+        get => isActiveSfx;
+        private set
+        {
+            if (isActiveSfx != value)
+            {
+                isActiveSfx = value;
+                MainSystem.Instance.UIManager.UIController.OptionUI.SetImage();
+            }
+        }
+    }
+
+    private bool isActiveBgm;
+    public bool IsActiveBgm
+    {
+        get => isActiveBgm;
+        private set
+        {
+            if (isActiveBgm != value)
+            {
+                isActiveBgm = value;
+                MainSystem.Instance.UIManager.UIController.OptionUI.SetImage();
+            }
+        }
+    }
+}
 public partial class SoundManager : MonoBehaviour // Initialize
 {
     private void Allocate()
@@ -62,7 +93,9 @@ public partial class SoundManager : MonoBehaviour // Sign
     {
         string json = File.ReadAllText(savePath);
         saveData = JsonUtility.FromJson<SoundSaveData>(json);
-        MainSystem.Instance.UIManager.UIController.OptionUI.LoadData(Convert.ToBoolean(saveData.isActiveSfx), Convert.ToBoolean(saveData.isActiveBgm));
+        isActiveSfx = Convert.ToBoolean(saveData.isActiveSfx);
+        isActiveBgm = Convert.ToBoolean(saveData.isActiveBgm);
+        // 04 15 여기서 UI이미지 업뎃 해야할듯?
     }
 
     public void InitialData()

@@ -65,7 +65,10 @@ public partial class EndStageUI : MonoBehaviour // Property
         StageInformation info = MainSystem.Instance.StageManager.StageInformation;
         string stageName = string.Format("Stage{0:D2}Scene", info.stage_id);
         if (Enum.TryParse(stageName, true, out SceneName sceneName))
+        {
+            MainSystem.Instance.StageManager.SetStage();
             MainSystem.Instance.SceneManager.LoadScene(sceneName);
+        }
         else
             Debug.LogWarning($"StageName Parse Error [name {stageName}]");
     }

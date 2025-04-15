@@ -73,7 +73,7 @@ public partial class PlayerBuildingCombat : MonoBehaviour // Property
 {
     private void Attack()
     {
-        if (Target != null)
+        if (Target != null && playerBuilding.PlayerBuildingAnimation.IsLooking)
         {
             playerBuilding.PlayerBuildingAnimation.AttackTrigger();
             PlayerBullet bullet = MainSystem.Instance.PoolManager.Spawn(playerBulletInformation.name, null, Target.position).GetComponent<PlayerBullet>();

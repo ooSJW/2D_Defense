@@ -44,3 +44,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a45da5bd9f9234c9be8428d6b10156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxObject: {fileID: 4484862584347756979, guid: edd143b848992814d921b69c664b9ef0, type: 3}
+  <BackgroundMusic>k__BackingField: {fileID: 856936224025962411, guid: c5621d7da26d25a41a9367aa2255777b, type: 3}
+  sfxDataList:
+  - soundEffectName: 1
+    audioClip: {fileID: 8300000, guid: 90e5eb7f61d4f994280d266969ee17e0, type: 3}
+  - soundEffectName: 2
+    audioClip: {fileID: 8300000, guid: a3019d357cbf9204db0ef0daea8b0079, type: 3}
+  - soundEffectName: 3
+    audioClip: {fileID: 8300000, guid: b9ee1cce3e94e244994a8ea54cb547bd, type: 3}
+  - soundEffectName: 4
+    audioClip: {fileID: 8300000, guid: 7251054b26b48f94685026d95e7c9032, type: 3}
+  - soundEffectName: 5
+    audioClip: {fileID: 8300000, guid: 5b6dfff75a29d5940bf52a375dfcd6fa, type: 3}
+  - soundEffectName: 6
+    audioClip: {fileID: 8300000, guid: 125ea0cfa69d2d448a9435c5088bf29a, type: 3}
+  - soundEffectName: 7
+    audioClip: {fileID: 8300000, guid: 95afba1a1b54cc54e8d8de87782b785d, type: 3}
+  - soundEffectName: 8
+    audioClip: {fileID: 8300000, guid: 483e6135c1a8f194f953ab8c77455d74, type: 3}
+  - soundEffectName: 9
+    audioClip: {fileID: 8300000, guid: f760ba4891cbcbc4ca0409a91bdc3101, type: 3}
+  - soundEffectName: 10
+    audioClip: {fileID: 8300000, guid: eabec7710a749cf40b9cda9656e05295, type: 3}
+  - soundEffectName: 11
+    audioClip: {fileID: 8300000, guid: 94d9e353d9794c646b975bfa6ac2c30d, type: 3}
+  poolSize: 20

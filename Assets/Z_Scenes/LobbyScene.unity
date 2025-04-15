@@ -2650,11 +2650,11 @@ PrefabInstance:
     - target: {fileID: 9035173503432867427, guid: 008e8edbd4bd08e408caa38cf8ca82f4, type: 3}
       propertyPath: <SoundEffect>k__BackingField
       value: 
-      objectReference: {fileID: 1924751422}
+      objectReference: {fileID: 0}
     - target: {fileID: 9035173503432867427, guid: 008e8edbd4bd08e408caa38cf8ca82f4, type: 3}
       propertyPath: <BackgroundMusic>k__BackingField
       value: 
-      objectReference: {fileID: 1898823561}
+      objectReference: {fileID: 7745285465839075102}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4071,28 +4071,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896991911}
   m_CullTransparentMesh: 1
---- !u!114 &1898823561 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4050145704149189749, guid: c5621d7da26d25a41a9367aa2255777b, type: 3}
-  m_PrefabInstance: {fileID: 7745285465839075101}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce782560a539174ba9aae1d34341269, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1924751422 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6579239957056958127, guid: c5621d7da26d25a41a9367aa2255777b, type: 3}
-  m_PrefabInstance: {fileID: 7745285465839075101}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dfbf1de464e7a743b30cc202237a468, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1961239037
 GameObject:
   m_ObjectHideFlags: 0
@@ -4650,13 +4628,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8365548622333736188, guid: c5621d7da26d25a41a9367aa2255777b, type: 3}
       propertyPath: m_Name
-      value: Sound
+      value: BackgroundMusic
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5621d7da26d25a41a9367aa2255777b, type: 3}
+--- !u!114 &7745285465839075102 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 856936224025962411, guid: c5621d7da26d25a41a9367aa2255777b, type: 3}
+  m_PrefabInstance: {fileID: 7745285465839075101}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce782560a539174ba9aae1d34341269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

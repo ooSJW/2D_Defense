@@ -1,7 +1,7 @@
-index,name,ui_name,description,damage_array,attack_range_array,attack_delay_array,building_type,cost,upgrad_cost,resell_cost_percent,max_level,usable_bullet_name,unlock_level,unlock_cost
-1001,SmallTankA,기관포탑,가장 기본적인 기관포탑 입니다.,1 2,2.5 3.5,1 0.75,MachineGun,150,250,0.6,2,BulletA,0,0
-1002,SmallTankB,로켓포탑,가장 기본적인 로켓포탑 입니다.,3 4,3.5 4.5,3 2,Cannon,250,300,0.6,2,CannonA,0,0
-1003,SmallTankC,개량형 기관포탑,기관포탑을 개량해 전체적인 성능을 향상시킨 기관포탑 입니다.,2 3,3 4,0.7 0.5,MachineGun,300,250,0.6,2,BulletB,5,300
-1004,MediumTankA,개량형 로켓포탑,로켓포탑을 개량한 결과물로 기존 로켓포탑보다 비거리와 데미지가 증가한 로켓포탑 입니다.,4 6,4 5,2 1,Cannon,350,300,0.6,2,CannonB,7,400
-1005,MediumTankB,고성능 기관포탑,현존하는 기관포탑 중 가장 강력한 성능을 가진 기관포탑 입니다.,3 4,3.5 5,0.4 0.2,MachineGun,400,350,0.6,2,BulletC,9,500
-1006,MediumTankC,고성능 로켓포탑,포탄 한 발로 세상을 평정해주지.,6 9,4.5 6.5,1.5 0.5,Cannon,450,500,0.6,2,CannonC,10,700
+index,name,ui_name,description,damage_array,attack_range_array,attack_delay_array,building_type,cost,upgrad_cost,resell_cost_percent,max_level,usable_bullet_name,unlock_level,unlock_cost,sound_clip_name
+1001,SmallTankA,기관포탑,가장 기본적인 기관포탑 입니다.,1 2,2.5 3.5,1 0.75,MachineGun,150,250,0.6,2,BulletA,0,0,MachineGunA
+1002,SmallTankB,로켓포탑,가장 기본적인 로켓포탑 입니다.,3 4,3.5 4.5,3 2,Cannon,250,300,0.6,2,CannonA,0,0,CannonShootA
+1003,SmallTankC,개량형 기관포탑,기관포탑을 개량해 전체적인 성능을 향상시킨 기관포탑 입니다.,2 3,3 4,0.7 0.5,MachineGun,300,250,0.6,2,BulletB,5,300,MachineGunB
+1004,MediumTankA,개량형 로켓포탑,로켓포탑을 개량한 결과물로 기존 로켓포탑보다 비거리와 데미지가 증가한 로켓포탑 입니다.,4 6,4 5,2 1,Cannon,350,300,0.6,2,CannonB,7,400,CannonShootA
+1005,MediumTankB,고성능 기관포탑,현존하는 기관포탑 중 가장 강력한 성능을 가진 기관포탑 입니다.,3 4,3.5 5,0.4 0.2,MachineGun,400,350,0.6,2,BulletC,9,500,MachineGunC
+1006,MediumTankC,고성능 로켓포탑,포탄 한 발로 세상을 평정해주지.,6 9,4.5 6.5,1.5 0.5,Cannon,450,500,0.6,2,CannonC,10,700,CannonShootB

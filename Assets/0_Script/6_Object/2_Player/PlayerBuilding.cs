@@ -16,6 +16,7 @@ public partial class PlayerBuilding : MonoBehaviour // Data Field
     [SerializeField] private SpriteRenderer attackRangespriteRenderer;
 
     private BuildingName buildingName;
+    private SoundEffectName soundEffectName;
     private float spriteSize;
 
 }
@@ -45,6 +46,7 @@ public partial class PlayerBuilding : MonoBehaviour // Data Property
                 upgrad_cost = value.upgrad_cost,
                 unlock_cost = value.unlock_cost,
                 unlock_level = value.unlock_level,
+                sound_clip_name = value.sound_clip_name,
             };
             TotalCostValue += value.cost;
         }
@@ -91,7 +93,10 @@ public partial class PlayerBuilding : MonoBehaviour // Initialize
     private void Allocate()
     {
         if (Enum.TryParse<BuildingName>(name, true, out buildingName))
+        {
             PlayerBuildingInformation = MainSystem.Instance.DataManager.PlayerBuildingData.GetData(buildingName);
+            soundEffectName = Enum.Parse<SoundEffectName>(playerBuildingInformation.sound_clip_name);
+        }
         else
             Debug.LogWarning($"Parse Error Check [{name}] prefab Name or Enum field");
 
@@ -166,6 +171,7 @@ public partial class PlayerBuilding : MonoBehaviour // Property
     public void PlayParticle()
     {
         muzzleParticle.Play();
+        MainSystem.Instance.SoundManager.SoundController.PlaySoundSffect(soundEffectName);
     }
     public void PauseParticle()
     {

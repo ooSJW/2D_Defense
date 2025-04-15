@@ -73,3 +73,19 @@ public enum EnemyLayer
     Enemy,
     DeathEnemy,
 }
+
+public enum SoundEffectName
+{
+    None,
+    CannonShootA,
+    CannonShootB,
+    MachineGunA,
+    MachineGunB,
+    MachineGunC,
+    ExplosionA,
+    ExplosionB,
+    ExplosionC,
+    EnemyDeadA,
+    EnemyDeadB,
+    EnemyDeadC,
+}

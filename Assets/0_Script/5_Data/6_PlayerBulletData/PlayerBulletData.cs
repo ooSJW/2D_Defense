@@ -11,6 +11,7 @@ public partial class PlayerBulletData  // Information
         public string bullet_type;
         public float damage_range;
         public int max_hit_object_count;
+        public string sound_clip_name;
     }
 }
 
