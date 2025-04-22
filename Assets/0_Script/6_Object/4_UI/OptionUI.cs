@@ -43,6 +43,8 @@ public partial class OptionUI : MonoBehaviour // Initialize
             isActiveBgm = true;
             SaveData();
         }
+        else
+            SetImage();
 
         SceneType sceneType = MainSystem.Instance.SceneManager.ActiveScene.SceneType;
         switch (sceneType)

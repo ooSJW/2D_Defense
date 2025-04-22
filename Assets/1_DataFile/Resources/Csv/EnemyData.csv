@@ -1,7 +1,7 @@
 index,name,move_speed,max_hp,drop_exp,drop_coin,damage
-500,Knight,2,2,4,12,2
-501,Merchant,1.8,4,6,16,4
-502,Peasant,1.4,6,8,22,5
-503,Priest,1.2,8,12,30,6
-504,Soldier,0.8,10,18,40,7
-505,Thief,0.5,12,30,56,9
+500,Knight,1.5,20,4,12,2
+501,Merchant,1.8,40,6,16,4
+502,Peasant,1.6,60,8,22,5
+503,Priest,1,80,12,30,6
+504,Soldier,1.8,100,18,40,7
+505,Thief,2.25,120,30,56,9

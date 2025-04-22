@@ -48,8 +48,8 @@ public partial class StageManager : MonoBehaviour // Data Property
                     stage_start_delay = value.stage_start_delay,
                     is_last_stage = value.is_last_stage,
                 };
-                SetStage();
             }
+                SetStage();
         }
     }
 

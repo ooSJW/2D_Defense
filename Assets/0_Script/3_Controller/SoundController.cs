@@ -20,6 +20,9 @@ public partial class SoundController : MonoBehaviour // Data Field
     private Dictionary<SoundEffectName, AudioClip> sfxDict;
     private Queue<SoundEffect> sfxPool;
     [SerializeField] private int poolSize;
+
+    private bool isActiveSfx;
+    private bool isActiveBgm;
 }
 public partial class SoundController : MonoBehaviour // Initialize
 {
@@ -35,11 +38,12 @@ public partial class SoundController : MonoBehaviour // Initialize
         InitSfxDict();
         InitSfxPool();
 
-        BackgroundMusic.Initialize();
+        BackgroundMusic.Initialize(isActiveBgm);
     }
     private void Setup()
     {
-
+        isActiveSfx = MainSystem.Instance.SoundManager.IsActiveSfx;
+        isActiveBgm = MainSystem.Instance.SoundManager.IsActiveBgm;
     }
 }
 public partial class SoundController : MonoBehaviour // Property
@@ -62,11 +66,14 @@ public partial class SoundController : MonoBehaviour // Property
 
     public void PlaySoundSffect(SoundEffectName clipName)
     {
-        if (sfxDict.ContainsKey(clipName))
+        if (isActiveSfx)
         {
-            SoundEffect sfx = sfxPool.Count > 0 ? sfxPool.Dequeue() : CreateNewSoundEffect();
-            sfx.gameObject.SetActive(true);
-            sfx.PlaySoundEffect(sfxDict[clipName], ReturnToPool);
+            if (sfxDict.ContainsKey(clipName))
+            {
+                SoundEffect sfx = sfxPool.Count > 0 ? sfxPool.Dequeue() : CreateNewSoundEffect();
+                sfx.gameObject.SetActive(true);
+                sfx.PlaySoundEffect(sfxDict[clipName], ReturnToPool);
+            }
         }
     }
 
@@ -82,5 +89,20 @@ public partial class SoundController : MonoBehaviour // Property
     {
         sfx.gameObject.SetActive(false);
         sfxPool.Enqueue(sfx);
+    }
+
+    public void SetIsActiveSfx(bool sfx)
+    {
+        isActiveSfx = sfx;
+    }
+
+    public void SetIsActiveBgm(bool bgm)
+    {
+        isActiveBgm = bgm;
+
+        if (isActiveBgm)
+            BackgroundMusic.BackgroundMusicStart();
+        else
+            BackgroundMusic.BackgroundMusicStop();
     }
 }
