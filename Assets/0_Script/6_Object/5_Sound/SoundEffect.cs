@@ -12,7 +12,7 @@ public partial class SoundEffect : MonoBehaviour // Initialize
     private void Allocate()
     {
         audioSource.playOnAwake = false;
-        audioSource.volume = 0.5f;
+        audioSource.volume = 0.3f;
     }
     public void Initialize()
     {

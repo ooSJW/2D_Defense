@@ -88,4 +88,8 @@ public enum SoundEffectName
     EnemyDeadA,
     EnemyDeadB,
     EnemyDeadC,
+    Click,
+    BuyBuilding,
+    StageClear,
+    StageFailed,
 }

@@ -515,6 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EnemyMovement>k__BackingField: {fileID: -8976135988509865543}
   <EnemyAnimation>k__BackingField: {fileID: 1927059885041945324}
+  deathSound: 10
 --- !u!114 &-8976135988509865543
 MonoBehaviour:
   m_ObjectHideFlags: 0

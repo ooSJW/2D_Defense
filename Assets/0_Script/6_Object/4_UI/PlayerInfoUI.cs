@@ -32,14 +32,19 @@ public partial class PlayerInfoUI : MonoBehaviour // Property
     {
         Player player = MainSystem.Instance.PlayerManager.Player;
 
-        playerLevelText.text = $"Lv : {player.Level}";
         int maxExp, currentExp;
         maxExp = player.MaxExp;
         currentExp = player.Exp;
         float fillAmount = maxExp > 0 ? (float)currentExp / maxExp : 0f;
+        string expText = $"{(fillAmount * 100):0.0}";
 
+        playerLevelText.text = $"Lv : {player.Level}";
         playerExpFillImage.fillAmount = fillAmount;
-        playerExpText.text = $"{(fillAmount * 100):0.0}";
         playerCoinText.text = MainSystem.Instance.PlayerManager.Coin.ToString();
+
+        if (player.Level >= player.PlayerInformation.max_level)
+            expText = $"최대 레벨 도달";
+
+        playerExpText.text = expText;
     }
 }

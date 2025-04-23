@@ -39,7 +39,6 @@ public partial class EndStageUI : MonoBehaviour // Property
         {
             stageMessage.text = "Stage Clear!";
             retryButton.gameObject.SetActive(false);
-
             if (MainSystem.Instance.StageManager.IsLastStage)
                 nextStageButton.gameObject.SetActive(false);
             else

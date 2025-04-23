@@ -55,7 +55,7 @@ public partial class PlayerBuildingAnimation : MonoBehaviour // Property
             transform.rotation = Quaternion.Euler(0, 0, smoothAngle);
 
             float angleDiff = Mathf.DeltaAngle(transform.eulerAngles.z, targetAngle);
-            if (Mathf.Abs(angleDiff) < 5f)
+            if (Mathf.Abs(angleDiff) < 15f)
                 isLooking = true;
             else
                 isLooking = false;

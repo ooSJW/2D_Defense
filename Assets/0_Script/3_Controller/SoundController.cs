@@ -1,7 +1,9 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public struct SFXData
@@ -48,6 +50,24 @@ public partial class SoundController : MonoBehaviour // Initialize
 }
 public partial class SoundController : MonoBehaviour // Property
 {
+    public void AddButtonSound()
+    {
+        Button[] button = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        for (int i = 0; i < button.Length; i++)
+        {
+            SoundEffectName sound = SoundEffectName.None;
+            if (button[i].CompareTag("BuyBuilding"))
+                sound = SoundEffectName.BuyBuilding;
+            else
+                sound = SoundEffectName.Click;
+
+            // 클로저 캡처 이슈가 발생할 수 있기에 지역 변수에 값 복사 후 사용.
+            // 클로저 캡처 : 람다가 sound변수를 참조 하는 방식으로 작동해서 그렇다는데...
+            // 그냥 사용해도 문제 없었지만 혹시 모를 버그 방지를 위해 해당 방법을 기용함.
+            SoundEffectName captureSound = sound;
+            button[i].onClick.AddListener(() => PlaySoundEffect(captureSound));
+        }
+    }
     private void InitSfxDict()
     {
         foreach (SFXData sfxData in sfxDataList)
@@ -64,7 +84,7 @@ public partial class SoundController : MonoBehaviour // Property
         }
     }
 
-    public void PlaySoundSffect(SoundEffectName clipName)
+    public void PlaySoundEffect(SoundEffectName clipName)
     {
         if (isActiveSfx)
         {

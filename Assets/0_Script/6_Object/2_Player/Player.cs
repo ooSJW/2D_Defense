@@ -70,6 +70,11 @@ public partial class Player : MonoBehaviour // Data Property
         {
             if (exp != value)
             {
+                if (level >= maxLevel)
+                {
+                    exp = MaxExp - 1;
+                    return;
+                }
                 exp = value;
                 while (exp >= maxExp)
                 {

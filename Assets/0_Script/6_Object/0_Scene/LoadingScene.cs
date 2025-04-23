@@ -84,6 +84,7 @@ public partial class LoadingScene : BaseScene // Coroutine
                 if (progressBar.fillAmount >= 1f)
                 {
                     loadScene.allowSceneActivation = true;
+                    Time.timeScale = 1f;
                     yield break;
                 }
             }

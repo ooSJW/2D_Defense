@@ -56,7 +56,7 @@ public partial class StageUI : MonoBehaviour // Initialize
     }
     private void Setup()
     {
-
+        transform.localScale = Vector3.one;
     }
 }
 public partial class StageUI : MonoBehaviour // Property

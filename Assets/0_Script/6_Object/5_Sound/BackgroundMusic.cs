@@ -10,7 +10,8 @@ public partial class BackgroundMusic : MonoBehaviour // Initialize
     private void Allocate()
     {
         audioSource.clip = clip;
-        audioSource.volume = 0.7f;
+        audioSource.volume = 0.5f;
+        audioSource.loop = true;
         audioSource.playOnAwake = false;
     }
     public void Initialize(bool isActive)
@@ -33,12 +34,10 @@ public partial class BackgroundMusic : MonoBehaviour // Property
     public void BackgroundMusicStart()
     {
         audioSource.Play();
-        print("Play");
     }
 
     public void BackgroundMusicStop()
     {
         audioSource.Stop();
-        print("Stop");
     }
 }

@@ -42,6 +42,7 @@ public partial class UIController : MonoBehaviour // Initialize
                 StoreUI.Initialize();
                 InventoryUI.Initialize();
                 LobbyStageUI.Initialize();
+                MainSystem.Instance.SoundManager.SoundController.AddButtonSound();
                 break;
             case SceneType.Combat:
                 OptionUI.Initialize();
@@ -49,6 +50,7 @@ public partial class UIController : MonoBehaviour // Initialize
                 EndStageUI.Initialize();
                 PlayerBuildingInfoUI.Initialize();
                 StageInfoUI.Initialize();
+                MainSystem.Instance.SoundManager.SoundController.AddButtonSound();
                 break;
         }
     }

@@ -171,7 +171,7 @@ public partial class PlayerBuilding : MonoBehaviour // Property
     public void PlayParticle()
     {
         muzzleParticle.Play();
-        MainSystem.Instance.SoundManager.SoundController.PlaySoundSffect(soundEffectName);
+        MainSystem.Instance.SoundManager.SoundController.PlaySoundEffect(soundEffectName);
     }
     public void PauseParticle()
     {

@@ -15,13 +15,13 @@ public partial class CameraDrag : MonoBehaviour // Main
 {
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             lastMousePosition = Input.mousePosition;
             isDragging = true;
         }
 
-        if (Input.GetMouseButton(0) && isDragging)
+        if (Input.GetMouseButton(1) && isDragging)
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
@@ -39,7 +39,7 @@ public partial class CameraDrag : MonoBehaviour // Main
             }
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(1))
         {
             isDragging = false;
         }

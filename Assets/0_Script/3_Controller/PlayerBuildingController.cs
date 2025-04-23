@@ -147,7 +147,6 @@ public partial class PlayerBuildingController : MonoBehaviour // Property
                         PlaceBuilding(hit.collider);
                     else
                     {
-                        // SelectedBuilding이 cotroller.activeBuildingList에 없을 경우 비활
                         MainSystem.Instance.PoolManager.Despawn(SelectedBuilding.gameObject);
                         IsPlacing = false;
                     }

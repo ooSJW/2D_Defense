@@ -33,7 +33,7 @@ public partial class BuildingUI : MonoBehaviour // Initialize
         nameText.text = playerBuildingInformation.ui_name;
         descriptionText.text = playerBuildingInformation.description;
         costText.text = $"Cost : {playerBuildingInformation.cost}";
-
+        transform.localScale = Vector3.one;
         button.onClick.AddListener(() => MainSystem.Instance.UIManager.UIController.UIButtonEvent.SelectBuilding(buildingName));
     }
 }

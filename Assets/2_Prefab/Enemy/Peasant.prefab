@@ -74,6 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EnemyMovement>k__BackingField: {fileID: -783577321414716126}
   <EnemyAnimation>k__BackingField: {fileID: 8518002617130381648}
+  deathSound: 11
 --- !u!114 &-783577321414716126
 MonoBehaviour:
   m_ObjectHideFlags: 0

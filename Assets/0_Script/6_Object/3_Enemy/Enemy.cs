@@ -68,6 +68,7 @@ public partial class Enemy : MonoBehaviour // Data Property
                 {
                     isAlive = false;
                     DropReward();
+                    MainSystem.Instance.SoundManager.SoundController.PlaySoundEffect(deathSound);
                     EnemyAnimation.SetAnimation();
                     Death();
                 }
@@ -76,6 +77,7 @@ public partial class Enemy : MonoBehaviour // Data Property
     }
 
     private bool isAlive;
+    [SerializeField] private SoundEffectName deathSound;
 }
 public partial class Enemy : MonoBehaviour // Initialize
 {

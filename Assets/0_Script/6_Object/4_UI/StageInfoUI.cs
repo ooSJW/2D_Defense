@@ -48,7 +48,7 @@ public partial class StageInfoUI : MonoBehaviour // Corutine
 
         for (int i = (int)countdown; i > 0; i--)
         {
-            stageMessageText.text = $"다음 웨이브 시작까지\n{i}";
+            stageMessageText.text = $"다음 웨이브 시작까지 {i}";
             stageMessageText.alpha = 1f;
             yield return new WaitForSeconds(1f);
         }
@@ -72,7 +72,7 @@ public partial class StageInfoUI : MonoBehaviour // Corutine
 
         stageMessageText.text = message;
         stageMessageText.alpha = 1f;
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSecondsRealtime(delayTime);
 
         stageMessageText.alpha = 0f;
         stageMessageText.gameObject.SetActive(false);

@@ -50,7 +50,7 @@ public partial class PlayerBullet : MonoBehaviour // Property
     public void PlayEffectWithDamage()
     {
         hitEnemyList.Clear();
-        MainSystem.Instance.SoundManager.SoundController.PlaySoundSffect(clipName);
+        MainSystem.Instance.SoundManager.SoundController.PlaySoundEffect(clipName);
         Vector2 boxSize = new Vector2(playerBulletInformation.damage_range, 1f);
         Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxSize, 0f, enemyLayer);
 

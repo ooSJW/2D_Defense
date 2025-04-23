@@ -39,6 +39,7 @@ public partial class StoreBuildingUI : MonoBehaviour // Initialize
     }
     private void Setup()
     {
+        transform.localScale = Vector3.one;
         buyButton.onClick.AddListener(UnlockBuilding);
     }
 }
@@ -81,6 +82,7 @@ public partial class StoreBuildingUI : MonoBehaviour // Property
     {
         MainSystem.Instance.PlayerManager.Player.UnlockBuilding(buildingName);
         MainSystem.Instance.PlayerManager.SpendCoin(playerBuildingInformation.unlock_cost);
+        MainSystem.Instance.SoundManager.SoundController.PlaySoundEffect(SoundEffectName.BuyBuilding);
         MainSystem.Instance.UIManager.UIController.RefreshLobbyUI();
     }
 }

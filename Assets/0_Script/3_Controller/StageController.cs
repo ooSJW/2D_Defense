@@ -96,13 +96,21 @@ public partial class StageController : MonoBehaviour // Coroutine
         MainSystem.Instance.PlayerManager.SavePlayerData();
         MainSystem.Instance.DataManager.SaveData();
 
-
+        SoundEffectName soundEffectName = SoundEffectName.None;
         StageInformation info = MainSystem.Instance.StageManager.StageInformation;
         if (isClear)
+        {
             MainSystem.Instance.StageManager.SaveStageScore(info.stage_id, GetScore());
+            soundEffectName = SoundEffectName.StageClear;
+        }
+        else
+            soundEffectName = SoundEffectName.StageFailed;
+
 
         yield return MainSystem.Instance.UIManager.UIController.StageInfoUI.EndStage(isClear, info.stage_start_delay, info.stage_id);
 
+        Time.timeScale = 0f;
+        MainSystem.Instance.SoundManager.SoundController.PlaySoundEffect(soundEffectName);
         MainSystem.Instance.UIManager.UIController.EndStage(isClear);
         yield break;
     }
